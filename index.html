@@ -19,10 +19,10 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="col-md-2 d-none d-md-block sidebar">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
-                        <li class="nav-item"><img src="sampleImages/books.jpg" class="img-fluid" alt="Responsive image" style="height: 200px; width: 200px;"></li>
+                        <li class="nav-item"><button class="btn"><img src="sampleImages/books.jpg" class="img-fluid" alt="Responsive image" style="height: 100px; width: 100px;"></button></li>
                         <li class="nav-item">item</li>
                         <li class="nav-item">item</li>
                         <li class="nav-item">item</li>
@@ -30,9 +30,21 @@
                     </ul>
                 </div>
             </div>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                    checking border
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="mainFrame">
+                <div class="d-block">
+                    <div class="d-inline">
+                        <button class="btn btn-lg" onclick="changeMainFrame(1)">Large inline button</button>
+                    </div>
+                    <div class="d-inline">
+                        <button class="btn btn-lg">YALIB</button>
+                    </div>
+                    <div class="d-inline">
+                        <button class="btn btn-lg">YALIB</button>
+                    </div>
+                </div>
+                <div class="d-block">
+                    <button type="button" class="btn btn-lg btn-block" id="bigButtonOne">Click me!</button>
+                    <button type="button" class="btn btn-lg btn-block" id="bigButtonOne">No, click ME!</button>
                 </div>
             </main>
         </div>

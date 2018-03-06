@@ -83,3 +83,11 @@ function toggleTime(){
 function updateDay(){
     document.getElementById("dayCount").innerHTML = "Day " + dayCount;
 }
+
+
+
+// will call this function when a button is clicked in on the main frame. Passing in 
+// the index of the HTML to be displayed. Need to store that in some variable...
+function changeMainFrame(index) {
+    document.getElementById("mainFrame").innerHTML = "<h1>TEST" + index + "</h1>";
+}
