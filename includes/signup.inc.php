@@ -31,15 +31,16 @@ if(isset($_POST['submit'])) {
                         $sql = "SELECT * FROM users WHERE gameID = '$game'";
                         $result = mysqli_query($conn, $sql);
                         $resultCheck = mysqli_num_rows($result);
-                        if($resultCheck == 0) {
-                            $unique = TRUE;
-                        } else {
+                        if($resultCheck > 0) {
                             $game = rand();
+                        } else {
+                            $unique = TRUE;
                         }
                     }
                     $sql = "INSERT INTO users (email, password, gameID) VALUES ('$email', '$hashedPwd', '$game')";
                     mysqli_query($conn, $sql);
-                    header("Location: ../util/createGame.php?gid=$game");
+                    header("Location: ../util/createGame.php?gid=" . urlencode($game));
+                    exit();
                 }
             }
         }

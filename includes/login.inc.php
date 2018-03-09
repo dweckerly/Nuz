@@ -1,5 +1,4 @@
 <?php
-
 if(isset($_POST['submit'])) {
     include_once('db.inc.php');
     $email = mysqli_real_escape_string($conn, $_POST['email']);
@@ -21,6 +20,8 @@ if(isset($_POST['submit'])) {
                     $hash = $row['password'];
                     if(password_verify($password, $hash)) {
                         echo "Success!";
+                        // add game redirect logic here
+                        // preferably utilizing SESSION
                     } else {
                         header("Location: ../login.php?login=pwd");
                         exit();
@@ -40,4 +41,3 @@ if(isset($_POST['submit'])) {
     header("Location: ../login.php");
     exit();
 }
-
