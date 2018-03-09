@@ -7,7 +7,7 @@ if(!empty($_GET['gid'])) {
     $resultCheck = mysqli_num_rows($result);
     if($resultCheck > 0) {
         echo "Loading...";
-
+        //$sql = "INSERT INTO games "
     } else {
         header("Location: ../index.php");
         exit();

@@ -17,11 +17,16 @@ if(isset($_POST['submit'])) {
             $resultCheck = mysqli_num_rows($result);
             if($resultCheck == 1) {
                 $row = mysqli_fetch_assoc($result);
-                $hash = $row['password'];
-                if(password_verify($password, $hash)) {
-                    echo "Success!";
+                if($row['active'] == 1) {
+                    $hash = $row['password'];
+                    if(password_verify($password, $hash)) {
+                        echo "Success!";
+                    } else {
+                        header("Location: ../login.php?login=pwd");
+                        exit();
+                    }
                 } else {
-                    header("Location: ../login.php?login=pwd");
+                    header("Location: ../login.php?login=inactive");
                     exit();
                 }
             } else {
@@ -30,7 +35,6 @@ if(isset($_POST['submit'])) {
             }
         }
     }
-
     mysqli_close($conn);
 } else {
     header("Location: ../login.php");
