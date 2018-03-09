@@ -33,3 +33,4 @@ if(!isset($_SESSION['gid'] || !isset($_SESSION['pid']))) {
         mysqli_close($conn);
     }
 }
+?>
