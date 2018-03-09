@@ -28,7 +28,7 @@ if(isset($_POST['submit'])) {
                     $game = rand();
                     $sql = "INSERT INTO users (email, password, gameID) VALUES ('$email', '$hashedPwd', '$game')";
                     mysqli_query($conn, $sql);
-                    header("Location: ../game.php");
+                    header("Location: ../createGame.php?gid=$game");
                 }
             }
         }
