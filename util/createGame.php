@@ -7,6 +7,7 @@ if(!empty($_GET['gid'])) {
     $resultCheck = mysqli_num_rows($result);
     if($resultCheck > 0) {
         echo "Loading...";
+        
     } else {
         header("Location: ../index.php");
         exit();
