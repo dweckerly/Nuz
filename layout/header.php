@@ -18,6 +18,9 @@
                 <a class="nav-link" href="about.php">About</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="rmon.php">Random 'Mon</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="about.php">Log In</a>
             </li>
         </ul>

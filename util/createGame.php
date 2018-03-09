@@ -27,7 +27,10 @@ if(!empty($_GET['gid'])) {
             }
             $sql = "INSERT INTO games (gameID, playerID) VALUES ('$gid', '$pid')";
             mysqli_query($conn, $sql);
-            header("Location: ../game/intro.php?gid=" . urlencode($game) . "&pid=" . urlencode($pid));
+            session_start();
+            $_SESSION['gid'] = $gid;
+            $_SESSION['pid'] = $pid;
+            header("Location: ../game/intro.g.php");
             exit();
         } else {
             // check for gid in users table returned 0

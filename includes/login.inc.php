@@ -19,7 +19,7 @@ if(isset($_POST['submit'])) {
                 if($row['active'] == 1) {
                     $hash = $row['password'];
                     if(password_verify($password, $hash)) {
-                        echo "Success!";
+                        echo "Loading...";
                         // add game redirect logic here
                         // preferably utilizing SESSION
                     } else {
