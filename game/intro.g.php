@@ -3,7 +3,7 @@
 // need to set up mailing system for notifications if 
 // an error occurrs at this stage...
 
-if(!isset($_SESSION['gid'] || !isset($_SESSION['pid']))) {
+if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
     header("Location: ../error.php?intro=nosesh");
     exit();
 } else {
@@ -33,4 +33,4 @@ if(!isset($_SESSION['gid'] || !isset($_SESSION['pid']))) {
         mysqli_close($conn);
     }
 }
-?>
+include("html/intro.html");
