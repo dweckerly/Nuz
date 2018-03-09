@@ -26,6 +26,17 @@ if(isset($_POST['submit'])) {
                 } else {
                     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
                     $game = rand();
+                    $unique = FALSE;
+                    while(!$unique) {
+                        $sql = "SELECT * FROM users WHERE gameID = '$game'";
+                        $result = mysqli_query($conn, $sql);
+                        $resultCheck = mysqli_num_rows($result);
+                        if($resultCheck == 0) {
+                            $unique = TRUE;
+                        } else {
+                            $game = rand();
+                        }
+                    }
                     $sql = "INSERT INTO users (email, password, gameID) VALUES ('$email', '$hashedPwd', '$game')";
                     mysqli_query($conn, $sql);
                     header("Location: ../util/createGame.php?gid=$game");
