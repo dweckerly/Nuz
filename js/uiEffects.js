@@ -4,8 +4,8 @@ typeSpeed = 50;
 function fadeInEffect(id) {
     var j = 0;
     var fadeTarget = document.getElementById(id);
-    var fadeEffect = setInterval(function () {
-        if(fadeTarget.style.opacity >= 1.0) {
+    var fadeEffect = setInterval(function() {
+        if (fadeTarget.style.opacity >= 1.0) {
             console.log("Done " + fadeTarget.style.opacity);
             clearInterval(fadeEffect);
         } else {
@@ -19,8 +19,8 @@ function fadeInEffect(id) {
 function fadeOutEffect(id) {
     var j = 1;
     var fadeTarget = document.getElementById(id);
-    var fadeEffect = setInterval(function () {
-        if(j <= 0) {
+    var fadeEffect = setInterval(function() {
+        if (j <= 0) {
             clearInterval(fadeEffect);
         } else {
             j -= 0.05;
@@ -36,7 +36,6 @@ function typeWriter(txt, id) {
         if (i < txt.length) {
             document.getElementById(id).innerHTML += txt.charAt(i);
             i++;
-            setTimeout(typeWriter, typeSpeed);
         } else {
             clearTimeout(typeWriter);
         }

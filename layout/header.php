@@ -29,7 +29,7 @@ if(!isset($_SESSION['login'])) {
             <?php 
             if($_SESSION['login']) {
                 echo "<li class='nav-item text-right'>
-                <a class='nav-link' href='logout.inc.php'>Log Out</a>
+                <a class='nav-link' href='includes/logout.inc.php'>Log Out</a>
             </li>";
             } else {
                 echo "<li class='nav-item text-right'>

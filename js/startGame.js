@@ -7,9 +7,8 @@ var txt = [
 var click = 0;
 
 function start() {
-    console.log("function started");
-    if (click < txt.length()) {
-        console.log("typewriter started");
+    if (click < txt.length) {
+        document.getElementById('startText').innerHTML = "";
         typeWriter(txt[click], 'startText');
     } else {
         nameModal();
@@ -18,7 +17,6 @@ function start() {
 
 function nextText() {
     click++;
-    console.log(click);
     start();
 }
 
