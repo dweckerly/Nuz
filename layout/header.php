@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['login'])) {
+    $_SESSION['login'] == FALSE;
+}
+?>
 <!DOCTYPE html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,15 +20,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li class="nav-item text-right">
                 <a class="nav-link" href="about.php">About</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item text-right">
                 <a class="nav-link" href="rmon.php">Random 'Mon</a>
             </li>
-            <li class="nav-item text-right">
-                <a class="nav-link" href="about.php">Log In</a>
-            </li>
+            <?php 
+            if($_SESSION['login']) {
+                echo "<li class='nav-item text-right'>
+                <a class='nav-link' href='login.php'>Log Out</a>
+            </li>";
+            } else {
+                echo "<li class='nav-item text-right'>
+                <a class='nav-link' href='login.php'>Log In</a>
+            </li>";
+            }
+            ?>
         </ul>
     </div>
 </nav>
