@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if(isset($_POST['submit'])) {
     include_once('db.inc.php');
     $email = mysqli_real_escape_string($conn, $_POST['email']);

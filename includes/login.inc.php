@@ -22,7 +22,7 @@ if(isset($_POST['submit'])) {
                 if($row['active'] == 1) {
                     $hash = $row['password'];
                     if(password_verify($password, $hash)) {
-                        echo "Loading...";
+                        echo "Hold yer bologna...";
                         $_SESSION['login'] = TRUE;
                         $_SESSION['gid'] = $row['gameID'];
                         $gid = $_SESSION['gid'];
