@@ -6,10 +6,12 @@ if(isset($_POST['submit'])) {
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
     if(empty($email) || empty($password)) {
+        mysqli_close($conn);
         header("Location: ../index.php?signup=empty");
         exit();
     } else {
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            mysqli_close($conn);
             header("Location: ../index.php?signup=invalid");
             exit();
         } else {
@@ -17,10 +19,12 @@ if(isset($_POST['submit'])) {
             $result = mysqli_query($conn, $sql);
             $resultCheck = mysqli_num_rows($result);
             if($resultCheck > 0) {
+                mysqli_close($conn);
                 header("Location: ../index.php?signup=email");
                 exit();
             } else {
                 if(strlen($password) < 4) {
+                    mysqli_close($conn);
                     header("Location: ../index.php?signup=pwd");
                     exit();
                 } else {
@@ -39,13 +43,13 @@ if(isset($_POST['submit'])) {
                     }
                     $sql = "INSERT INTO users (email, password, gameID) VALUES ('$email', '$hashedPwd', '$game')";
                     mysqli_query($conn, $sql);
+                    mysqli_close($conn);
                     header("Location: ../util/createGame.php?gid=" . urlencode($game));
                     exit();
                 }
             }
         }
     }
-    mysqli_close($conn);
 } else {
     header("Location: ../index.php");
     exit();
