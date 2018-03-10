@@ -2,7 +2,7 @@
 
 // need to set up mailing system for notifications if 
 // an error occurrs at this stage...
-
+session_start();
 if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
     header("Location: ../error.php?intro=nosesh");
     exit();

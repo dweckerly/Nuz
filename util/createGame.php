@@ -5,7 +5,7 @@ if(!empty($_GET['gid'])) {
     if(!ctype_digit($gid)) {
         // gid passed is not all digit
         header("Location: ../index.php?g=nodig");
-        exit()
+        exit();
     } else {
         $sql = "SELECT * FROM users WHERE gameID = '$gid' AND active = '1'";
         $result = mysqli_query($conn, $sql);

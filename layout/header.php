@@ -7,7 +7,7 @@
     <title>NuzMon</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-light navbar-expand-lg text-dark">
     <a class="navbar-brand" href="../">NuzMon</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,7 +20,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="rmon.php">Random 'Mon</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item text-right">
                 <a class="nav-link" href="about.php">Log In</a>
             </li>
         </ul>
