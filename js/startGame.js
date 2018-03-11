@@ -7,7 +7,11 @@ function start() {
         disableButton("nextButton");
         typeWriter(txt[click], 'startText');
     } else {
-        nameModal();
+        if (name == true) {
+            monModal();
+        } else {
+            nameModal();
+        }
     }
 }
 
@@ -17,6 +21,9 @@ function nextText() {
 }
 
 function nameModal() {
-    console.log("called...")
     $('#nameModal').modal('show');
+}
+
+function monModal() {
+    $('#monModal').modal('show');
 }

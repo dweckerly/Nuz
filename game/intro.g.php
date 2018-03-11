@@ -40,7 +40,6 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
     <title>NuzMon</title>
 </head>
@@ -80,6 +79,9 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
                 \"Go ahead and choose one to take with you.\"];
         </script>";
         }
+        echo "<script type='text/javascript'>
+            var name = true;
+        </script>";
     }
     ?>
     
@@ -88,7 +90,14 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
             <div class="row align-items-center justify-content-center">
                 <div class="col-sm-8">
                     <div class="d-block">
-                        <p id="startText"></p>
+                        <div class="row">
+                            <div class="col-sm">
+                                <p id="startText"></p>
+                            </div>
+                            <div class="col-sm">
+                                <img src="../img/people/pete-moss.jpg">
+                            </div>
+                        </div>
                     </div>
                     <div class="d-block">
                         <button class="btn" id="nextButton" onclick="nextText()">...></button>
