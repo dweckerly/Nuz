@@ -1,5 +1,5 @@
 fadeSpeed = 50;
-typeSpeed = 50;
+typeSpeed = 20;
 
 function fadeInEffect(id) {
     var j = 0;
@@ -29,15 +29,24 @@ function fadeOutEffect(id) {
     }, fadeSpeed);
 }
 
+function disableButton(btnid) {
+    document.getElementById(btnid).disabled = true;
+}
+
+function enableButton(btnid) {
+    document.getElementById(btnid).disabled = false;
+}
 
 function typeWriter(txt, id) {
+    clearTimeout(typeEffect);
     var i = 0;
     var typeEffect = setInterval(function() {
         if (i < txt.length) {
             document.getElementById(id).innerHTML += txt.charAt(i);
             i++;
         } else {
-            clearTimeout(typeWriter);
+            enableButton("nextButton");
+            clearTimeout(typeEffect);
         }
     }, typeSpeed);
 }

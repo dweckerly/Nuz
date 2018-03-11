@@ -6,9 +6,13 @@ include_once('layout/header.php');
     <div class="main-wrapper">
         <h3>Log In</h3>
         <form class="login-form" action="includes/login.inc.php" method="POST">
-            <input type="text" name="email" placeholder="Da emails">
-            <input type="text" name="password" placeholder="yur paswerd">
-            <button type="submit" name="submit">Log In</button>
+            <div class="form-group">
+                <input type="text" name="email" placeholder="Da emails">
+                <input type="text" name="password" placeholder="yur paswerd">
+            </div>
+            <div class="form-group">
+                <button class="btn" type="submit" name="submit">Log In</button>
+            </div>
         </form>
         <?php
         if(!empty($_GET['login'])) {

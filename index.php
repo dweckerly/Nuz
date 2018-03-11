@@ -10,9 +10,13 @@ include_once('layout/header.php');
     } else {
         echo "<h3>Sign Up</h3>
         <form class='signup-form' action='includes/signup.inc.php' method='POST'>
-            <input type='text' name='email' placeholder='Da emails'>
-            <input type='text' name='password' placeholder='yur paswerd'>
-            <button type='submit' name='submit'>Create Account</button>
+            <div class='form-group'>
+                <input type='text' name='email' placeholder='Da emails'>
+                <input type='password' name='password' placeholder='yur paswerd'>
+            </div>
+            <div class=form-group>
+                <button class='btn' type='submit' name='submit'>Create Account</button>
+            </div>
         </form>";
         if(!empty($_GET['signup'])) {
             $suErr = $_GET['signup'];
