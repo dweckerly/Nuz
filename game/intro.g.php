@@ -45,6 +45,24 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
 </head>
 
 <body onload="start()">
+    <nav class="navbar sticky-top">
+        <h3>NuzMon</h3>
+        <span class="navbar-text"><div class="d-inline" id="dayCount">Day 1</div>&nbsp;<div class="d-inline" id="time">07:00</div>&nbsp;<div class="d-inline" id="dayOrNight">Day</div></span>
+        <button class="btn" type="submit" disabled>Log out</button>
+    </nav>
+    <div class="row">
+        <div class="col-md-2 d-none d-md-block sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><button class="btn"><img src="../img/ui/dex.jpg" class="img-fluid"></button></li>
+                    <li class="nav-item"><button class="btn"><img src="../img/ui/mons.jpg" class="img-fluid"></button></li>
+                    <li class="nav-item"><button class="btn"><img src="../img/ui/inventory.jpg" class="img-fluid"></button></li>
+                    <li class="nav-item"><button class="btn"><img src="../img/ui/player.jpg" class="img-fluid"></button></li>
+                    <li class="nav-item"><button class="btn"><img src="../img/ui/journal.jpg" class="img-fluid"></button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <?php
     if(!isset($_SESSION['name'])) {
         echo "<script type='text/javascript' src='../js/namePlayer.js'></script>
@@ -57,7 +75,7 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
                             <input type='text' name='name' placeholder='Your name'>
                         </div>
                         <div class='form-group'>
-                            <button type='submit' class='btn' name='submit'>Confirm</button>
+                            <button type='submit' class='btn btn-outline-secondary' name='submit'>Confirm</button>
                         </div>
                     </form>
                 </div>
@@ -91,6 +109,7 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
                 <div class="col-sm-8">
                     <div class="d-block">
                         <div class="row">
+                            <div class="col-sm"></div>
                             <div class="col-sm">
                                 <p id="startText"></p>
                             </div>
@@ -99,8 +118,8 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
                             </div>
                         </div>
                     </div>
-                    <div class="d-block">
-                        <button class="btn" id="nextButton" onclick="nextText()">...></button>
+                    <div class="d-block text-center">
+                        <button class="btn btn-outline-secondary" id="nextButton" onclick="nextText()">...></button>
                     </div>
                 </div>
             </div>

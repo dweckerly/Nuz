@@ -3,7 +3,7 @@ include_once('layout/header.php');
 ?>
 
 <section class="main-container">
-    <div class="main-wrapper">
+    <div class="container">
         <h3>Log In</h3>
         <form class="login-form" action="includes/login.inc.php" method="POST">
             <div class="form-group">
@@ -11,7 +11,7 @@ include_once('layout/header.php');
                 <input type="text" name="password" placeholder="yur paswerd">
             </div>
             <div class="form-group">
-                <button class="btn" type="submit" name="submit">Log In</button>
+                <button class="btn btn-outline-secondary" type="submit" name="submit">Log In</button>
             </div>
         </form>
         <?php

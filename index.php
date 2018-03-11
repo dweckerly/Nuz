@@ -4,9 +4,14 @@ include_once('layout/header.php');
 
 <section class="main-container">
     <div class="container">
+        <div class="row">
+            <div class="col-sm">
     <?php 
     if($_SESSION['login'] == TRUE) {
 
+        // At some point would like to put player
+        // info right here...
+        
     } else {
         echo "<h3>Sign Up</h3>
         <form class='signup-form' action='includes/signup.inc.php' method='POST'>
@@ -15,7 +20,7 @@ include_once('layout/header.php');
                 <input type='password' name='password' placeholder='yur paswerd'>
             </div>
             <div class=form-group>
-                <button class='btn' type='submit' name='submit'>Create Account</button>
+                <button class='btn btn-outline-secondary' type='submit' name='submit'>Create Account</button>
             </div>
         </form>";
         if(!empty($_GET['signup'])) {
@@ -46,6 +51,11 @@ include_once('layout/header.php');
         echo "<a href='login.php'>Or log in</a>";
     }
     ?>
+            </div>
+            <div class="col-sm">
+                <h3>News</h3>
+            </div>
+        </div>
     </div>
 </section>
 
