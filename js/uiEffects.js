@@ -37,12 +37,12 @@ function enableButton(btnid) {
     document.getElementById(btnid).disabled = false;
 }
 
-function typeWriter(txt, id) {
+function typeWriter(text, id) {
     clearTimeout(typeEffect);
     var i = 0;
     var typeEffect = setInterval(function() {
-        if (i < txt.length) {
-            document.getElementById(id).innerHTML += txt.charAt(i);
+        if (i < text.length) {
+            document.getElementById(id).innerHTML += text.charAt(i);
             i++;
         } else {
             enableButton("nextButton");
