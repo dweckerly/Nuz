@@ -83,6 +83,25 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
         </div>
     </div>";
     } else {
+        echo "<div class='modal fade' id='monModal'>
+        <div class='modal-dialog modal-dialog-centered'>
+            <div class='modal-content'>
+                <div class='modal-body'>
+                    <div class='row'>
+                        <div class='d-inline'>
+                            <button type='button' class='btn'><img src='../img/mons/muskip.jpg'></button>
+                        </div>
+                        <div class='d-inline'>
+                            <button type='button' class='btn'><img src='../img/mons/embah.jpg'></button>
+                        </div>
+                        <div class='d-inline'>
+                            <button type='button' class='btn'><img src='../img/mons/derple.jpg'></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>";
         if(isset($_SESSION['noname'])) {
             echo "<script type='text/javascript'>
             var txt = [\"Silent type, huh? Guess I'll just call you... " . $_SESSION['name'] . ".\" ,
@@ -97,9 +116,6 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
                 \"Go ahead and choose one to take with you.\"];
         </script>";
         }
-        echo "<script type='text/javascript'>
-            var name = true;
-        </script>";
     }
     ?>
     

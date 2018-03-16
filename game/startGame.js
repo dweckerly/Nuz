@@ -1,13 +1,13 @@
 var click = 0;
 
 function start() {
+    $('#nameModal').modal({ show: false });
     if (click < txt.length) {
         document.getElementById('startText').innerHTML = "";
         disableButton("nextButton");
         typeWriter(txt[click], 'startText');
     } else {
-        openModal('#nameModal');
-        openModal('#monModal');
+        nameModal();
     }
 }
 
@@ -16,6 +16,7 @@ function nextText() {
     start();
 }
 
-function openModal(id) {
-    $(id).modal();
+function nameModal() {
+    console.log("called...")
+    $('#nameModal').modal('show');
 }
