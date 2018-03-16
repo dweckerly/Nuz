@@ -22,13 +22,13 @@ function openModal(id) {
 
 $('#monOne').click(function() {
     confirmChoice(1);
-})
+});
 $('#monTwo').click(function() {
     confirmChoice(2);
-})
+});
 $('#monThree').click(function() {
     confirmChoice(3);
-})
+});
 
 function confirmChoice(id) {
     if(id == 1) {
