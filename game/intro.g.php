@@ -88,34 +88,34 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
             <div class='modal-content'>
                 <div class='modal-body'>
                     <div class='row'>
-                        <div class='col-sm'>
-                            <div class='card' style='width: 18rem;'>
-                                <img class='card-img-top' src='../img/mons/muskip.jpg' alt='Card image cap'>
+                        <div class='card-group' >
+                            <div class='card' id='monOne'>
+                                <img class='card-img-top' src='../img/mons/muskip.jpg'>
                                 <div class='card-body'>
-                                    <h5 class='card-title'>Here would be the name from the DB</h5>
+                                    <h5 class='card-title'>Name from DB</h5>
                                     <p class='card-text'>Here would be a description from the DB</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class='col-sm'>
-                            <div class='card' style='width: 18rem;'>
-                                <img class='card-img-top' src='../img/mons/embah.jpg' alt='Card image cap'>
+                            <div class='card' id='monTwo'>
+                                <img class='card-img-top' src='../img/mons/embah.jpg'>
                                 <div class='card-body'>
-                                    <h5 class='card-title'>Here would be the name from the DB</h5>
+                                    <h5 class='card-title'>Name from DB</h5>
                                     <p class='card-text'>Here would be a description from the DB</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class='col-sm'>
-                            <div class='card' style='width: 18rem;'>
-                                <img class='card-img-top' src='../img/mons/derple.jpg' alt='Card image cap'>
+                            <div class='card' id='monThree'>
+                                <img class='card-img-top' src='../img/mons/derple.jpg'>
                                 <div class='card-body'>
-                                    <h5 class='card-title'>Here would be the name from the DB</h5>
+                                    <h5 class='card-title'>Name from DB</h5>
                                     <p class='card-text'>Here would be a description from the DB</p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class='modal-footer' id='chooseModalFooter' style='display:none;'>
+                    <p id='chooseDialogue'></p>
+                    <button type='submit' class='btn btn-outline-secondary' name='submit'>Yes!</button>
                 </div>
             </div>
         </div>
