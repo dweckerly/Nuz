@@ -21,16 +21,6 @@ function openModal(id) {
     $(id).modal();
 }
 
-$('#monOne').click(function() {
-    confirmChoice(1);
-});
-$('#monTwo').click(function() {
-    confirmChoice(2);
-});
-$('#monThree').click(function() {
-    confirmChoice(3);
-});
-
 function confirmChoice(id) {
     if(id == 1) {
         name = "Carnipula";
@@ -46,10 +36,10 @@ function confirmChoice(id) {
     document.getElementById('chooseDialogue').innerHTML = "So you choose " + name + "?";
 }
 
-$('#choiceButton').click(function() {
+function makeChoice() {
     $.post("../util/setFirstMon.php",
         {
             id: choice
         }
-    )
-});
+    );
+}
