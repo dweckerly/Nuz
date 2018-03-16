@@ -115,7 +115,7 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
                 </div>
                 <div class='modal-footer' id='chooseModalFooter' style='display:none;'>
                     <p id='chooseDialogue'></p>
-                    <button type='submit' class='btn btn-outline-secondary' name='submit'>Yes!</button>
+                    <button type='submit' class='btn btn-outline-secondary' id='choiceButton' name='submit'>Yes!</button>
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 var click = 0;
+var choice = 0;
 
 function start() {
     if (click < txt.length) {
@@ -40,6 +41,15 @@ function confirmChoice(id) {
     } else {
         name = "ERROR!!!";
     }
+    choice = id;
     document.getElementById('chooseModalFooter').style.display = "block";
     document.getElementById('chooseDialogue').innerHTML = "So you choose " + name + "?";
 }
+
+$('#choiceButton').click(function() {
+    $.post("../util/setFirstMon.php",
+        {
+            id: choice
+        }
+    )
+});
