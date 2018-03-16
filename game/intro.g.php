@@ -88,14 +88,32 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
             <div class='modal-content'>
                 <div class='modal-body'>
                     <div class='row'>
-                        <div class='d-inline'>
-                            <button type='button' class='btn'><img src='../img/mons/muskip.jpg'></button>
+                        <div class='col-sm'>
+                            <div class='card' style='width: 18rem;'>
+                                <img class='card-img-top' src='../img/mons/muskip.jpg' alt='Card image cap'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>Here would be the name from the DB</h5>
+                                    <p class='card-text'>Here would be a description from the DB</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class='d-inline'>
-                            <button type='button' class='btn'><img src='../img/mons/embah.jpg'></button>
+                        <div class='col-sm'>
+                            <div class='card' style='width: 18rem;'>
+                                <img class='card-img-top' src='../img/mons/embah.jpg' alt='Card image cap'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>Here would be the name from the DB</h5>
+                                    <p class='card-text'>Here would be a description from the DB</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class='d-inline'>
-                            <button type='button' class='btn'><img src='../img/mons/derple.jpg'></button>
+                        <div class='col-sm'>
+                            <div class='card' style='width: 18rem;'>
+                                <img class='card-img-top' src='../img/mons/derple.jpg' alt='Card image cap'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>Here would be the name from the DB</h5>
+                                    <p class='card-text'>Here would be a description from the DB</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
