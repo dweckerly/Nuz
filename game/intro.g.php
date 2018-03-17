@@ -83,6 +83,43 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
         </div>
     </div>";
     } else {
+        echo "<div class='modal fade' id='monModal'>
+        <div class='modal-dialog modal-dialog-centered'>
+            <div class='modal-content'>
+                <div class='modal-body'>
+                    <div class='row'>
+                        <div class='card-group' >
+                            <div class='card' id='monOne' onclick='confirmChoice(1)'>
+                                <img class='card-img-top' src='../img/mons/muskip.jpg'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>Name from DB</h5>
+                                    <p class='card-text'>Here would be a description from the DB</p>
+                                </div>
+                            </div>
+                            <div class='card' id='monTwo' onclick='confirmChoice(2)'>
+                                <img class='card-img-top' src='../img/mons/embah.jpg'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>Name from DB</h5>
+                                    <p class='card-text'>Here would be a description from the DB</p>
+                                </div>
+                            </div>
+                            <div class='card' id='monThree' onclick='confirmChoice(3)'>
+                                <img class='card-img-top' src='../img/mons/derple.jpg'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>Name from DB</h5>
+                                    <p class='card-text'>Here would be a description from the DB</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='modal-footer' id='chooseModalFooter' style='display:none;'>
+                    <p id='chooseDialogue'></p>
+                    <button type='submit' class='btn btn-outline-secondary' id='choiceButton' name='submit' onclick='makeChoice()'>Yes!</button>
+                </div>
+            </div>
+        </div>
+    </div>";
         if(isset($_SESSION['noname'])) {
             echo "<script type='text/javascript'>
             var txt = [\"Silent type, huh? Guess I'll just call you... " . $_SESSION['name'] . ".\" ,
@@ -97,9 +134,6 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
                 \"Go ahead and choose one to take with you.\"];
         </script>";
         }
-        echo "<script type='text/javascript'>
-            var name = true;
-        </script>";
     }
     ?>
     

@@ -1,17 +1,14 @@
 var click = 0;
+var choice = 0;
 
 function start() {
-    $('#nameModal').modal({ show: false });
     if (click < txt.length) {
         document.getElementById('startText').innerHTML = "";
         disableButton("nextButton");
         typeWriter(txt[click], 'startText');
     } else {
-        if (name == true) {
-            monModal();
-        } else {
-            nameModal();
-        }
+        openModal('#nameModal');
+        openModal('#monModal');
     }
 }
 
@@ -20,10 +17,29 @@ function nextText() {
     start();
 }
 
-function nameModal() {
-    $('#nameModal').modal('show');
+function openModal(id) {
+    $(id).modal();
 }
 
-function monModal() {
-    $('#monModal').modal('show');
+function confirmChoice(id) {
+    if(id == 1) {
+        name = "Carnipula";
+    } else if(id == 2) {
+        name = "Embah";
+    } else if (id == 3) {
+        name = "Derple";
+    } else {
+        name = "ERROR!!!";
+    }
+    choice = id;
+    document.getElementById('chooseModalFooter').style.display = "block";
+    document.getElementById('chooseDialogue').innerHTML = "So you choose " + name + "?";
+}
+
+function makeChoice() {
+    $.post("../util/setFirstMon.php",
+        {
+            id: choice
+        }
+    );
 }
