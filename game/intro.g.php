@@ -69,7 +69,7 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
     <div class='modal fade' id='nameModal'>
         <div class='modal-dialog modal-dialog-centered'>
             <div class='modal-content'>
-                <div class='modal-body'>
+                <div class='modal-body' align='center'>
                     <form class='name-form' action='../includes/player.inc.php' method='POST'>
                         <div class='form-group'>
                             <input type='text' name='name' placeholder='Your name'>
@@ -113,7 +113,7 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
                         </div>
                     </div>
                 </div>
-                <div class='modal-footer' id='chooseModalFooter' style='display:none;'>
+                <div class='modal-footer' id='chooseModalFooter' align='center' style='display:none;'>
                     <p id='chooseDialogue'></p>
                     <button type='submit' class='btn btn-outline-secondary' id='choiceButton' name='submit' onclick='makeChoice()'>Yes!</button>
                 </div>
