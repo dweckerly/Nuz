@@ -31,9 +31,6 @@ if(isset($_POST['submit'])) {
                         $result = mysqli_query($conn, $sql);
                         $row = mysqli_fetch_assoc($result);
                         $_SESSION['pid'] = $row['playerID'];
-                        $_SESSION['loc'] = $row['locationID'];
-                        $_SESSION['day'] = $row['day'];
-                        $_SESSION['time'] = $row['time'];
                         mysqli_close($conn);
                         header("Location: ../");
                     } else {

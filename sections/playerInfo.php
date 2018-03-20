@@ -7,5 +7,7 @@
  */
 ?>
 <p>This is where retrieved information about the player will be</p>
-<button class="btn btn-outline-secondary" type="button">Play Game!</button>
+<?php 
+if()
+<button class="btn btn-outline-secondary" type="submit">Play Game!</button>
 
