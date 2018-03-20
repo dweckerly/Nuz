@@ -90,7 +90,7 @@ if(!isset($_SESSION['gid']) || !isset($_SESSION['pid'])) {
                     <div class='row'>
                         <div class='card-group' >
                             <div class='card' id='monOne' onclick='confirmChoice(1)'>
-                                <img class='card-img-top' src='../img/mons/muskip.jpg'>
+                                <img class='card-img-top' src='../img/mons/carnipula.jpg'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>Name from DB</h5>
                                     <p class='card-text'>Here would be a description from the DB</p>
