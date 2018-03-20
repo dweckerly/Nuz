@@ -6,3 +6,11 @@ body {
 #startText {
     font-size: 22px !important;
 }
+
+#signupForm, #loginForm {
+    display: none;
+}
+
+.index-section-header {
+    font-size: 36px;
+}

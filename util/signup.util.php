@@ -1,7 +1,7 @@
 <?php
-session_start();
+
 if(isset($_POST['submit'])) {
-    include_once('db.inc.php');
+    include_once('../includes/db.inc.php');
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
@@ -44,7 +44,10 @@ if(isset($_POST['submit'])) {
                     $sql = "INSERT INTO users (email, password, gameID) VALUES ('$email', '$hashedPwd', '$game')";
                     mysqli_query($conn, $sql);
                     mysqli_close($conn);
-                    header("Location: ../util/createGame.php?gid=" . urlencode($game));
+                    session_start();
+                    $_SESSION['login'] = TRUE;
+                    $_SESSION['gid'] = $game;
+                    header("Location: ../");
                     exit();
                 }
             }

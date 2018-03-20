@@ -1,17 +1,17 @@
 <?php
-session_start();
+
 if(isset($_POST['submit'])) {
-    include_once('db.inc.php');
+    include_once('../includes/db.inc.php');
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     if(empty($email) || empty($password)) {
         mysqli_close($conn);
-        header("Location: ../login.php?login=empty");
+        header("Location: ../index.php?login=empty");
         exit();
     } else {
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
             mysqli_close($conn);
-            header("Location: ../login.php?login=invalid");
+            header("Location: ../index.php?login=invalid");
             exit();
         } else {
             $sql = "SELECT * FROM users WHERE email = '$email'";
@@ -23,6 +23,7 @@ if(isset($_POST['submit'])) {
                     $hash = $row['password'];
                     if(password_verify($password, $hash)) {
                         echo "Hold yer bologna...";
+                        session_start();
                         $_SESSION['login'] = TRUE;
                         $_SESSION['gid'] = $row['gameID'];
                         $gid = $_SESSION['gid'];
@@ -34,26 +35,25 @@ if(isset($_POST['submit'])) {
                         $_SESSION['day'] = $row['day'];
                         $_SESSION['time'] = $row['time'];
                         mysqli_close($conn);
-                        // add game redirect logic here
-                        // preferably utilizing SESSION
+                        header("Location: ../");
                     } else {
                         mysqli_close($conn);
-                        header("Location: ../login.php?login=pwd");
+                        header("Location: ../index.php?login=pwd");
                         exit();
                     }
                 } else {
                     mysqli_close($conn);
-                    header("Location: ../login.php?login=inactive");
+                    header("Location: ../index.php?login=inactive");
                     exit();
                 }
             } else {
                 mysqli_close($conn);
-                header("Location: ../login.php?login=notfound");
+                header("Location: ../index.php?login=notfound");
                 exit(); 
             }
         }
     }
 } else {
-    header("Location: ../login.php");
+    header("Location: ../index.php");
     exit();
 }

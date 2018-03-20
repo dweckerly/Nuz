@@ -28,8 +28,6 @@ if(!empty($_GET['gid'])) {
             $sql = "INSERT INTO games (gameID, playerID) VALUES ('$gid', '$pid')";
             mysqli_query($conn, $sql);
             session_start();
-            $_SESSION['login'] = TRUE;
-            $_SESSION['gid'] = $gid;
             $_SESSION['pid'] = $pid;
             header("Location: ../game/intro.g.php");
             exit();

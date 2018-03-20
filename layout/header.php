@@ -10,7 +10,10 @@ if(!isset($_SESSION['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
     <link href="../css/style.css" rel="stylesheet">
+    <script src="../js/ajax.js"></script>
+    <script src="../js/uiEffects.js"></script>
     <title>NuzMon</title>
 </head>
 <body>
@@ -30,11 +33,7 @@ if(!isset($_SESSION['login'])) {
             <?php 
             if($_SESSION['login']) {
                 echo "<li class='nav-item text-right'>
-                <a class='nav-link' href='includes/logout.inc.php'>Log Out</a>
-            </li>";
-            } else {
-                echo "<li class='nav-item text-right'>
-                <a class='nav-link' href='login.php'>Log In</a>
+                <a class='nav-link' href='util/logout.util.php'>Log Out</a>
             </li>";
             }
             ?>

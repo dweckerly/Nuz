@@ -1,6 +1,11 @@
 fadeSpeed = 50;
 typeSpeed = 20;
 
+
+function clearHtml (id) {
+    document.getElementById(id).innerHTML = "";
+}
+
 function fadeInEffect(id) {
     var j = 0;
     var fadeTarget = document.getElementById(id);
