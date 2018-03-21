@@ -22,6 +22,10 @@ if(isset($_POST['submit'])){
                 $row = mysqli_fetch_assoc($result);
                 $pid = $row['playerID'];
                 $_SESSION['pid'] = $pid;
+                mysqli_close($conn);
+                // send to main game
+                header("Location: ../game/main.g.php");
+                exit();
             } else {
                 //create new player and game
                 echo "Creating player...";
@@ -40,14 +44,12 @@ if(isset($_POST['submit'])){
                 }
                 $sql = "INSERT INTO games (gameID, playerID) VALUES ('$gid', '$pid')";
                 mysqli_query($conn, $sql);
+                mysqli_close($conn);
                 $_SESSION['pid'] = $pid;
+                // send to intro scene
+                header("Location: ../game/intro.g.php");
+                exit();
             }
-            /*
-             * Send to actual game here 
-             */
-            header("Location: ../game/intro.g.php");
-            mysqli_close($conn);
-            exit();
         } else {
             // check for gid in users table returned 0
             header("Location: ../index.php?g=nofound");
