@@ -1,7 +1,7 @@
 var click = 0;
 var choice = 0;
 
-function start() {
+function start(txt) {
     if (click < txt.length) {
         document.getElementById('startText').innerHTML = "";
         disableButton("nextButton");

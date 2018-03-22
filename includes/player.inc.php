@@ -9,7 +9,6 @@ if(isset($_POST['submit'])) {
         $name = "Bob";
     }
     $_SESSION['name'] = $name;
-    $_COOKIE['name'] = $name;
     $sql = "INSERT INTO players (playerID, name) VALUES ('$pid', '$name')";
     mysqli_query($conn, $sql);
     mysqli_close($conn);

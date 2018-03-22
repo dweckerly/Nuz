@@ -1,18 +1,22 @@
-function getXHR(script) {
+function getXHR(script, fun) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", script, true)
-}
-
-function postXHR(script, data) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", script, true)
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.open("GET", script, true);
     xhr.onreadystatechange = function () {
         if(xhr.readyState == 4 && xhr.status == 200) {
-            var result = xhr.responseText;
+            fun(xhr.responseText);
+        }
+    }
+    xhr.send();
+}
+
+function postXHR(script, data, fun) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", script, true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            fun(xhr.responseText);
         }
     }
     xhr.send(data);
 }
-

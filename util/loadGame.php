@@ -27,25 +27,7 @@ if(isset($_POST['submit'])){
                 header("Location: ../game/main.g.php");
                 exit();
             } else {
-                //create new player and game
-                echo "Creating player...";
-                $pid = rand();
-                $unique = FALSE;
-                // ensure creation of unique pid
-                while(!$unique) {
-                    $sql = "SELECT * FROM games WHERE playerID = '$pid'";
-                    $result = mysqli_query($conn, $sql);
-                    $resultCheck = mysqli_num_rows($result);
-                    if($resultCheck > 0) {
-                        $pid = rand();
-                    } else {
-                        $unique = TRUE;
-                    }
-                }
-                $sql = "INSERT INTO games (gameID, playerID) VALUES ('$gid', '$pid')";
-                mysqli_query($conn, $sql);
                 mysqli_close($conn);
-                $_SESSION['pid'] = $pid;
                 // send to intro scene
                 header("Location: ../game/intro.g.php");
                 exit();
