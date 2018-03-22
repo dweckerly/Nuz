@@ -4,3 +4,8 @@ var txt = [
     "Let me be the first to say... Welcome! Name's Pete Moss. I been a ranch-hand here for awhile now, so I'll show you around the place.",
     "What's your name?"
 ];
+
+var txt2 = [
+    '',
+    'Whadaya say you give that little critter a name, huh?'
+];
