@@ -25,7 +25,12 @@ var txt1 = ["Whadaya say we find you a pardner? It's been tough times around her
 ];
 var txt2 = ['Whadaya say you give that little critter a name, huh?'];
 
-var txt3 = ["Whelp, looks like you're all set.",
+// add stuff about catching nuzmon
+var txt3 = ["Suppose all you need now is... more 'mons!",
+    ""];
+
+// go over battle? have battle?
+var txt4 = ["", 
     ""];
 
 
@@ -72,6 +77,10 @@ function start(txt) {
         } else if (state == 4) {
             openModal(modals[modalIndex]);
             modalIndex++;
+        } else if(state == 5) {
+            giveTrap();
+        } else if(state == 6) {
+
         }
     }
 }
@@ -96,6 +105,9 @@ function nextText() {
         start(txt2);
     } else if (state == 5) {
         start(txt3);
+    } else if(state == 6) {
+        document.body.removeEventListener("click", nextText());
+        start(txt4);
     }
 }
 
@@ -133,4 +145,18 @@ function moreExposition() {
     console.log("Donezo...");
     state = 5;
     nextText();
+}
+
+// will need to write php script as well as decide how 
+// to display the notification to the player.
+function giveTrap() {
+    var data = "id=0";
+    postXHR("../util/giveItem.php", data, function (response) {
+        var json = JSON.parse(response);
+        document.getElementById().innerHTML = json['name'];
+        document.getElementById().src = json['imgPath'];
+        $().modal();
+        state = 6;
+        document.body.addEventListener("click", nextText());
+    });
 }

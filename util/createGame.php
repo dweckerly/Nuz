@@ -22,7 +22,7 @@ if(!empty($_SESSION['gid'])) {
         $sql = "INSERT INTO games (gameID, playerID) VALUES ('$gid', '$pid')";
         mysqli_query($conn, $sql);
         $_SESSION['pid'] = $pid;
-        $_SESSION['name'] = $_POST['pName'];
+        $_SESSION['name'] = mysqli_real_escape_string($conn, $_POST['pName']);
         $name = $_SESSION['name'];
         
         // create player
@@ -31,6 +31,7 @@ if(!empty($_SESSION['gid'])) {
 
         // add mon to owned mons
         $monID = $_POST['monID'];
+        $monName = mysqli_real_escape_string($conn, $_POST['monName']);
         $sql = "SELECT hp, atk, def, sAtk, sDef, speed FROM mons WHERE monID = '$monID'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
@@ -42,7 +43,6 @@ if(!empty($_SESSION['gid'])) {
         $sAtk = $row['atk'] + (rand(0, 20) - 10);
         $sDef = $row['atk'] + (rand(0, 20) - 10);
         $speed = $row['atk'] + (rand(0, 20) - 10);
-        $monName = $_POST['monName'];
         $sql = "INSERT INTO ownedMons (monID, playerID, name, currentHP, hp, atk, def, sAtk, sDef, speed, perk1, atk1) VALUES ('$monID', '$pid', '$monName', '$hp', '$hp', '$atk', '$def', '$sAtk', '$sDef', '$speed', '$perk', '$atk1')";
         mysqli_query($conn, $sql);
         mysqli_close($conn);
