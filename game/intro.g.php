@@ -7,6 +7,7 @@ if(!isset($_SESSION['gid'])) {
 include_once("../layout/introHeader.php");
 include_once("../util/modals/nameModal.php");
 include_once("../util/modals/firstMonModal.php");
+include_once("../util/modals/nameMonModal.php");
 ?>
     <section class="main-container">
         <div class="main-wrapper">
@@ -15,10 +16,10 @@ include_once("../util/modals/firstMonModal.php");
                     <div class="d-block">
                         <div class="row">
                             <div class="col-sm"></div>
-                            <div class="col-sm">
+                            <div class="col">
                                 <p id="startText"></p>
                             </div>
-                            <div class="col-sm">
+                            <div class="col">
                                 <img src="../img/people/pete-moss.jpg">
                             </div>
                         </div>

@@ -2,22 +2,25 @@
 include_once("../includes/db.inc.php");
 $sql = "SELECT name, description, imgPath FROM mons WHERE monID = 1 OR monID = 4 OR monID = 7";
 $result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_array($result);
+$rows = array();
+while($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
+}
 mysqli_close($conn);
 ?>
 <script>
     var mons = {
         1 : {
-            "name" : "<?php echo $row[0];?>",
-            "img" : "<?php echo $row[2];?>"
+            "name" : "<?php echo $rows[0]['name'];?>",
+            "img" : "<?php echo $rows[0]['imgPath'];?>"
         },
         2 : {
-            "name" : "<?php echo $row[3];?>",
-            "img" : "<?php echo $row[5];?>"
+            "name" : "<?php echo $rows[1]['name'];?>",
+            "img" : "<?php echo $rows[1]['imgPath'];?>"
         },
         3 : {
-            "name" : "<?php echo $row[6];?>",
-            "img" : "<?php echo $row[8];?>"
+            "name" : "<?php echo $rows[2]['name'];?>",
+            "img" : "<?php echo $rows[2]['imgPath'];?>"
         }
     };
 </script>
@@ -28,24 +31,24 @@ mysqli_close($conn);
                     <div class='row'>
                         <div class='card-group' >
                             <div class='card' id='monOne' onclick='setChoice(1)'>
-                                <img class='card-img-top' src='<?php echo $row[2];?>'>
+                                <img class='card-img-top' src='<?php echo $rows[0]['imgPath'];?>'>
                                 <div class='card-body'>
-                                    <h5 class='card-title'><?php echo $row[0];?></h5>
-                                    <p class='card-text'><?php echo $row[1];?></p>
+                                    <h5 class='card-title'><?php echo $rows[0]['name'];?></h5>
+                                    <p class='card-text'><?php echo $rows[0]['description'];?></p>
                                 </div>
                             </div>
                             <div class='card' id='monTwo' onclick='setChoice(2)'>
-                                <img class='card-img-top' src='<?php echo $row[5];?>'>
+                                <img class='card-img-top' src='<?php echo $rows[1]['imgPath'];?>'>
                                 <div class='card-body'>
-                                    <h5 class='card-title'><?php echo $row[3];?></h5>
-                                    <p class='card-text'><?php echo $row[4];?></p>
+                                    <h5 class='card-title'><?php echo $rows[1]['name'];?></h5>
+                                    <p class='card-text'><?php echo $rows[1]['description'];?></p>
                                 </div>
                             </div>
                             <div class='card' id='monThree' onclick='setChoice(3)'>
-                                <img class='card-img-top' src='<?php echo $row[8];?>'>
+                                <img class='card-img-top' src='<?php echo $rows[2]['imgPath'];?>'>
                                 <div class='card-body'>
-                                    <h5 class='card-title'><?php echo $row[6];?></h5>
-                                    <p class='card-text'><?php echo $row[7];?></p>
+                                    <h5 class='card-title'><?php echo $rows[2]['name'];?></h5>
+                                    <p class='card-text'><?php echo $rows[2]['description'];?></p>
                                 </div>
                             </div>
                         </div>

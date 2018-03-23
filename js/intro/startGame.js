@@ -1,5 +1,5 @@
 var click = 0;
-var modals = ["#nameModal", "#monModal", "#nickNameModal"];
+var modals = ["#nameModal", "#monModal", "#nameMonModal"];
 var modalIndex = 0;
 
 var choice = 1;
@@ -9,6 +9,8 @@ var choiceBtn = document.getElementById('choiceBtn');
 
 var state = 0;
 var playerName = "";
+var monName = "";
+var monImg = "";
 
 var txt0 = ['Howdy pardner! This is The Ranch. It was left to you by your long-lost, eccentric, twice-removed, felon of an Uncle.',
     "Let me be the first to say... Welcome! Name's Pete Moss. I been a ranch-hand here for awhile now, so I'll show you around the place.",
@@ -22,6 +24,9 @@ var txt1 = ["Whadaya say we find you a pardner? It's been tough times around her
     "Go ahead and choose one to take with you."
 ];
 var txt2 = ['Whadaya say you give that little critter a name, huh?'];
+
+var txt3 = ["Whelp, looks like you're all set.",
+    ""];
 
 
 nameBtn.addEventListener("click", function() {
@@ -73,16 +78,8 @@ function start(txt) {
 
 function setChoice(num) {
     choice = num;
+    monName = mons[choice]['name'];
     document.getElementById('chooseModalFooter').style.display = "block";
-    if (choice == 1) {
-        var monName = "Carnipula";
-    } else if (choice == 2) {
-        var monName = "Embah";
-    } else if (choice == 3) {
-        var monName = "Derple";
-    } else {
-        window.location.replace("http://nuz.96.lt");
-    }
     document.getElementById('chooseDialogue').innerHTML = "So you choose " + monName + "?";
 }
 
@@ -97,6 +94,8 @@ function nextText() {
         start(txt1);
     } else if (state == 4) {
         start(txt2);
+    } else if (state == 5) {
+        start(txt3);
     }
 }
 
@@ -106,6 +105,32 @@ function openModal(id) {
 
 function makeChoice() {
     state = 4;
+    monName = mons[choice]['name'];
+    monImg = mons[choice]['img'];
     $('#monModal').modal('hide');
+    setMonName(monName, monImg);
+    nextText();
+}
+
+function setMonName(monName, imgSrc) {
+    document.getElementById('namePrompt').innerHTML = "What would you like to name your " + monName + "?";
+    document.getElementById('monImg').src = imgSrc;
+}
+
+var confirmBtn = document.getElementById('nameMonBtn');
+
+confirmBtn.addEventListener("click", function () {
+    $('#nameMonModal').modal('hide');
+    var monInputName = document.getElementById('nameMonTxt').value;
+    if(monInputName.length == 0) {
+        monInputName = monName;
+    }
+    data = "pName=" + playerName +"&monID=" + choice + "&monName=" + monInputName;
+    postXHR("../util/createGame.php", data, moreExposition);
+});
+
+function moreExposition() {
+    console.log("Donezo...");
+    state = 5;
     nextText();
 }
