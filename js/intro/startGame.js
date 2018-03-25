@@ -27,11 +27,13 @@ var txt2 = ['Whadaya say you give that little critter a name, huh?'];
 
 // add stuff about catching nuzmon
 var txt3 = ["Suppose all you need now is... more 'mons!",
-    ""];
+    ""
+];
 
 // go over battle? have battle?
-var txt4 = ["", 
-    ""];
+var txt4 = ["",
+    ""
+];
 
 
 nameBtn.addEventListener("click", function() {
@@ -77,9 +79,9 @@ function start(txt) {
         } else if (state == 4) {
             openModal(modals[modalIndex]);
             modalIndex++;
-        } else if(state == 5) {
+        } else if (state == 5) {
             giveTrap();
-        } else if(state == 6) {
+        } else if (state == 6) {
 
         }
     }
@@ -92,6 +94,7 @@ function setChoice(num) {
     document.getElementById('chooseDialogue').innerHTML = "So you choose " + monName + "?";
 }
 
+// handles text passing to start method
 function nextText() {
     if (state == 0) {
         start(txt0);
@@ -105,7 +108,7 @@ function nextText() {
         start(txt2);
     } else if (state == 5) {
         start(txt3);
-    } else if(state == 6) {
+    } else if (state == 6) {
         document.body.removeEventListener("click", nextText());
         start(txt4);
     }
@@ -131,18 +134,18 @@ function setMonName(monName, imgSrc) {
 
 var confirmBtn = document.getElementById('nameMonBtn');
 
-confirmBtn.addEventListener("click", function () {
+confirmBtn.addEventListener("click", function() {
     $('#nameMonModal').modal('hide');
     var monInputName = document.getElementById('nameMonTxt').value;
-    if(monInputName.length == 0) {
+    if (monInputName.length == 0) {
         monInputName = monName;
     }
-    data = "pName=" + playerName +"&monID=" + choice + "&monName=" + monInputName;
+    data = "pName=" + playerName + "&monID=" + choice + "&monName=" + monInputName;
     postXHR("../util/createGame.php", data, moreExposition);
 });
 
 function moreExposition() {
-    console.log("Donezo...");
+
     state = 5;
     nextText();
 }
@@ -151,7 +154,7 @@ function moreExposition() {
 // to display the notification to the player.
 function giveTrap() {
     var data = "id=0";
-    postXHR("../util/giveItem.php", data, function (response) {
+    postXHR("../util/giveItem.php", data, function(response) {
         var json = JSON.parse(response);
         document.getElementById().innerHTML = json['name'];
         document.getElementById().src = json['imgPath'];

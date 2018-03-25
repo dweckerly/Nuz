@@ -5,7 +5,7 @@
                 <h5 id="namePrompt"></h5>
                 <div class="row">
                     <div class="col">
-                        <img id="monImg" height="128" width="128" src="">
+                        <img id="monImg" height="64" width="64" src="">
                     </div>
                     <div class="col">
                         <form class='name-form'>
