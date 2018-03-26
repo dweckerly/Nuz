@@ -36,7 +36,7 @@ if(!isset($_SESSION['login'])) {
                 echo "<li class='nav-item text-right'>
                 <a class='nav-link' href='util/logout.util.php'>Log Out</a>
             </li>";
-            }
+            } 
             ?>
         </ul>
     </div>

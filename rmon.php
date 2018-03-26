@@ -1,7 +1,7 @@
 <?php
 include_once('layout/header.php');
 include_once('includes/db.inc.php');
-$num = rand(1, 12);
+$num = rand(1, 20);
 $sql = "SELECT name, description, imgPath FROM mons WHERE monID = '$num'";
 $resut = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($resut);
