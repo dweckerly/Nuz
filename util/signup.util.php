@@ -46,6 +46,8 @@ if(isset($_POST['submit'])) {
                     mysqli_close($conn);
                     session_start();
                     $_SESSION['login'] = TRUE;
+                    $_SESSION['lastActivity'] = time();
+                    $_SESSION['expire'] = 3*60*60;
                     $_SESSION['gid'] = $game;
                     header("Location: ../");
                     exit();

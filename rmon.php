@@ -1,4 +1,5 @@
 <?php
+include_once('util/sessionTracker.php');
 include_once('layout/header.php');
 include_once('includes/db.inc.php');
 $num = rand(1, 20);
