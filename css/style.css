@@ -14,3 +14,22 @@ body {
 .index-section-header {
     font-size: 36px;
 }
+
+.mon-battle-portrait {
+    display: block;
+    max-width: 256px;
+    max-height: 256px;
+    width: auto;
+    height: auto;
+}
+
+.battle-button {
+    width: 40%;
+}
+
+.player-mon-portrait {
+    -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+}

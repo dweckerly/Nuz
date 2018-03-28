@@ -32,18 +32,39 @@ if(!empty($_SESSION['gid'])) {
         // add mon to owned mons
         $monID = $_POST['monID'];
         $monName = mysqli_real_escape_string($conn, $_POST['monName']);
-        $sql = "SELECT hp, atk, def, sAtk, sDef, speed FROM mons WHERE monID = '$monID'";
+        $sql = "SELECT hp, atk, def, sAtk, sDef, speed, atkPool, perkPool FROM mons WHERE monID = '$monID'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
-        $perk = "dummy perk";
-        $atk1 = "dummy Atk";
+
+        // get stats
         $hp = $row['hp'] + (rand(0, 20) - 10);
         $atk = $row['atk'] + (rand(0, 20) - 10);
         $def = $row['atk'] + (rand(0, 20) - 10);
         $sAtk = $row['atk'] + (rand(0, 20) - 10);
         $sDef = $row['atk'] + (rand(0, 20) - 10);
         $speed = $row['atk'] + (rand(0, 20) - 10);
-        $sql = "INSERT INTO ownedMons (monID, playerID, name, currentHP, hp, atk, def, sAtk, sDef, speed, perk1, atk1) VALUES ('$monID', '$pid', '$monName', '$hp', '$hp', '$atk', '$def', '$sAtk', '$sDef', '$speed', '$perk', '$atk1')";
+
+        $aPool = $row['atkPool'];
+        $pPool = $row['perkPool'];
+
+        // get atks
+        $sql = "SELECT '0', '1' FROM attackPools WHERE apID = '$aPool'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+
+        $atk1 = $row['0'];
+        $atk2 = $row['1'];
+        
+        // get perk
+        $rand = rand(1, 2) - 1;
+        $sql = "SELECT '$rand' FROM perkPools WHERE ppID = '$pPool'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+
+        $perk = $row["$rand"];
+        
+        // insert into DB
+        $sql = "INSERT INTO ownedMons (monID, playerID, name, currentHP, hp, atk, def, sAtk, sDef, speed, perk1, atk1, atk2) VALUES ('$monID', '$pid', '$monName', '$hp', '$hp', '$atk', '$def', '$sAtk', '$sDef', '$speed', '$perk', '$atk1', '$atk2')";
         mysqli_query($conn, $sql);
         mysqli_close($conn);
         exit();

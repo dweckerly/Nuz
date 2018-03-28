@@ -1,4 +1,5 @@
 <?php
+include_once('../util/sessionTracker.php');
 session_start();
 if(!isset($_SESSION['gid'])) {
     header("Location: ../error.php?intro=nosesh");
