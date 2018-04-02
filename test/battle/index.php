@@ -11,6 +11,9 @@
     <script src="/js/uiEffects.js"></script>
     
     <title>NuzMon</title>
+<?php
+include_once("getPartyMons.php");
+?>
 </head>
 <body>
 <div class="container-fluid">
@@ -18,25 +21,25 @@
         <div class="col-6" align="center">
             <div class="d-block">
                 <div class="progress">
-                    <div id="enemy-health" class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div id="enemy-health" class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="" aria-valuemin="0" aria-valuemax=""></div>
                 </div>
             </div>
             <div class="d-block">
                 <p id="enemy-status">Status</p>
             </div>
         </div> 
-        <div class="col-6" style="background-color: #000022;" align="center">
-            <img id="enemy-mon-portrait" class="mon-battle-portrait" src="/img/mons/derple.jpg">
+        <div id="enemy-mon-portrait-container" class="col-6" align="center">
+            <img id="enemy-mon-portrait" class="mon-battle-portrait" src="">
         </div>
     </div>
     <div class="row align-items-center">
-        <div class="col-6" style="background-color: powderblue;" align="center">
-            <img id="player-mon-portrait" class="mon-battle-portrait" src="/img/mons/derple.jpg">
+        <div id="player-mon-portrait-container" class="col-6" align="center">
+            <img id="player-mon-portrait" class="mon-battle-portrait" src="">
         </div> 
         <div class="col-6" align="center">
             <div class="d-block">
                 <div class="progress">
-                    <div id="player-health" class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div id="player-health" class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="" aria-valuemin="0" aria-valuemax=""></div>
                 </div>
             </div>
             <div class="d-block">
@@ -45,21 +48,41 @@
         </div>
     </div>
     <div class=" row justify-content-center">
-        <div class="col-sm-6">
-            <div class="d-block" style="background-color: #123456;" align="center">
+        <div id="battle-command-container" class="col-sm-6">
+            <div class="d-block" align="center">
                 <div class="d-inline">
-                    <button id="btn-1" class="btn btn-outline-secondary battle-button">Label</button>
+                    <button id="atk-btn" class="btn btn-outline-secondary battle-button">Attack</button>
                 </div>
-                <div class="d-inline">
-                    <button class="btn btn-outline-secondary battle-button">Label</button>
+                <div id="switch-btn" class="d-inline">
+                    <button class="btn btn-outline-secondary battle-button">Switch</button>
                 </div>
             </div>
-            <div class="d-block" style="background-color: #654321;" align="center">
+            <div id="inv-btn" class="d-block" align="center">
                 <div class="d-inline">
-                    <button class="btn btn-outline-secondary battle-button">Label</button>
+                    <button class="btn btn-outline-secondary battle-button">Items</button>
+                </div>
+                <div id="sur-btn" class="d-inline">
+                    <button class="btn btn-outline-secondary battle-button">Surrender</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" row justify-content-center">
+        <div id="attack-container" class="col-sm-6">
+            <div class="d-block" align="center">
+                <div class="d-inline">
+                    <button id="atk-1" class="btn btn-outline-secondary battle-button"></button>
                 </div>
                 <div class="d-inline">
-                    <button class="btn btn-outline-secondary battle-button">Label</button>
+                    <button id="atk-2" class="btn btn-outline-secondary battle-button"></button>
+                </div>
+            </div>
+            <div class="d-block" align="center">
+                <div class="d-inline">
+                    <button id="atk-3" class="btn btn-outline-secondary battle-button"></button>
+                </div>
+                <div class="d-inline">
+                    <button id="atk-4" class="btn btn-outline-secondary battle-button"></button>
                 </div>
             </div>
         </div>
