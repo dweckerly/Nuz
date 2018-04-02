@@ -10,7 +10,7 @@
                     <div class="col">
                         <form class='name-form'>
                             <div class='form-group'>
-                                <input id="nameMonTxt" type='text' name='name' placeholder='Your name'>
+                                <input class="input" id="nameMonTxt" type='text' name='name' placeholder='Your name'>
                             </div>
                             <div class='form-group'>
                                 <button id="nameMonBtn" type='button' class='btn btn-outline-secondary' name='submit'>Confirm</button>

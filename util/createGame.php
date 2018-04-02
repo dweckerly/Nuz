@@ -3,7 +3,6 @@
 session_start();
 if(!empty($_SESSION['gid'])) {
     if(isset($_POST['pName']) && isset($_POST['monID'])) {
-        echo "Creating player...";
         $pid = rand();
         $unique = FALSE;
         // ensure creation of unique pid
@@ -39,32 +38,35 @@ if(!empty($_SESSION['gid'])) {
         // get stats
         $hp = $row['hp'] + (rand(0, 20) - 10);
         $atk = $row['atk'] + (rand(0, 20) - 10);
-        $def = $row['atk'] + (rand(0, 20) - 10);
-        $sAtk = $row['atk'] + (rand(0, 20) - 10);
-        $sDef = $row['atk'] + (rand(0, 20) - 10);
-        $speed = $row['atk'] + (rand(0, 20) - 10);
+        $def = $row['def'] + (rand(0, 20) - 10);
+        $sAtk = $row['sAtk'] + (rand(0, 20) - 10);
+        $sDef = $row['sDef'] + (rand(0, 20) - 10);
+        $speed = $row['speed'] + (rand(0, 20) - 10);
 
         $aPool = $row['atkPool'];
         $pPool = $row['perkPool'];
 
         // get atks
-        $sql = "SELECT '0', '1' FROM attackPools WHERE apID = '$aPool'";
+        $sql = "SELECT * FROM attackPools WHERE apID = '$aPool'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
 
-        $atk1 = $row['0'];
-        $atk2 = $row['1'];
+        $atk1 = $row['a1'];
+        $atk2 = $row['a2'];
         
         // get perk
         $rand = rand(1, 2) - 1;
-        $sql = "SELECT '$rand' FROM perkPools WHERE ppID = '$pPool'";
+        $sql = "SELECT * FROM perkPools WHERE ppID = '$pPool'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
-
-        $perk = $row["$rand"];
+        if($rand == 1) {
+            $perk = $row['p1'];
+        } else {
+            $perk = $row['p2'];
+        }
         
         // insert into DB
-        $sql = "INSERT INTO ownedMons (monID, playerID, name, currentHP, hp, atk, def, sAtk, sDef, speed, perk1, atk1, atk2) VALUES ('$monID', '$pid', '$monName', '$hp', '$hp', '$atk', '$def', '$sAtk', '$sDef', '$speed', '$perk', '$atk1', '$atk2')";
+        $sql = "INSERT INTO ownedMons (monID, playerID, name, currentHP, hp, atk, def, sAtk, sDef, speed, perk1, atk1, atk2, inParty) VALUES ('$monID', '$pid', '$monName', '$hp', '$hp', '$atk', '$def', '$sAtk', '$sDef', '$speed', '$perk', '$atk1', '$atk2', 1)";
         mysqli_query($conn, $sql);
         mysqli_close($conn);
         exit();

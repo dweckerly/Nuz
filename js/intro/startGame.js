@@ -140,12 +140,16 @@ confirmBtn.addEventListener("click", function() {
     if (monInputName.length == 0) {
         monInputName = monName;
     }
+    if (choice == 2) {
+        choice = 4;
+    } else if (choice == 3) {
+        choice = 7;
+    }
     data = "pName=" + playerName + "&monID=" + choice + "&monName=" + monInputName;
     postXHR("../util/createGame.php", data, moreExposition);
 });
 
 function moreExposition() {
-
     state = 5;
     nextText();
 }

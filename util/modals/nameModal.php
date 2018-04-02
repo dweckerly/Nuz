@@ -6,7 +6,7 @@
             <div class='modal-body' align='center'>
                 <form class='name-form'>
                     <div class='form-group'>
-                        <input id="nameTxt" type='text' name='name' placeholder='Your name'>
+                        <input class="input" id="nameTxt" type='text' name='name' placeholder='Your name'>
                     </div>
                     <div class='form-group'>
                         <button id="nameBtn" type='button' class='btn btn-outline-secondary' name='submit'>Confirm</button>
