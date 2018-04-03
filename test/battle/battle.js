@@ -17,8 +17,15 @@ document.ready = populatePlayerAttacks();
 
 document.getElementById('atk-btn').addEventListener('click', function () {
     // need to show attacks here
-    $('#battle-command-container').fadeOut(600, "swing");
-    $('#attack-container').fadeIn(600, "swing");
+    $('#battle-command-container').fadeOut(200, "swing", function() {
+        $('#attack-container').fadeIn(200, "swing");
+    });
+});
+
+document.getElementById('back-btn').addEventListener('click', function () {
+    $('#attack-container').fadeOut(200, "swing", function() {
+        $('#battle-command-container').fadeIn(200, "swing");
+    });
 });
 
 document.getElementById('switch-btn').addEventListener('click', function () {

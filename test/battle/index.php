@@ -85,6 +85,9 @@ include_once("getPartyMons.php");
                     <button id="atk-4" class="btn btn-outline-secondary battle-button"></button>
                 </div>
             </div>
+            <div align="center">
+                <button id="back-btn" class="btn btn-outline-secondary">-></button>
+            </div>
         </div>
     </div>
 </div>
