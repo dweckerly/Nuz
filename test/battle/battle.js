@@ -111,9 +111,7 @@ function populatePlayerAttacks() {
     $('#attack-container').hide();
     $('#atk-1').html(pMons[currentMon]['attacks'][1]['name']);
     $('#atk-1').click(function() {
-        $('#attack-container').hide();
-        atkChoice = 1;
-        playerAtk();
+        atkClick(1);
     });
     if (pMons[currentMon]['attacks'][2]['name'] == null) {
         $('#atk-2').html('-');
@@ -122,9 +120,7 @@ function populatePlayerAttacks() {
         $('#atk-2').html(pMons[currentMon]['attacks'][2]['name']);
         $('#atk-2').prop("disabled", false);
         $('#atk-2').click(function() {
-            $('#attack-container').hide();
-            atkChoice = 2;
-            playerAtk();
+            atkClick(2);
         });
     }
     if (pMons[currentMon]['attacks'][3] == null) {
@@ -134,9 +130,7 @@ function populatePlayerAttacks() {
         $('#atk-3').html(pMons[currentMon]['attacks'][3]['name']);
         $('#atk-3').prop("disabled", false);
         $('#atk-3').click(function() {
-            $('#attack-container').hide();
-            atkChoice = 3;
-            playerAtk();
+            atkClick(3);
         });
     }
     if (pMons[currentMon]['attacks'][4] == null) {
@@ -146,11 +140,15 @@ function populatePlayerAttacks() {
         $('#atk-4').html(pMons[currentMon]['attacks'][4]['name']);
         $('#atk-4').prop("disabled", false);
         $('#atk-4').click(function() {
-            $('#attack-container').hide();
-            atkChoice = 4;
-            playerAtk();
+            atkClick(4);
         });
     }
+}
+
+function atkClick(num) {
+    $('#attack-container').hide();
+    atkChoice = num;
+    playerAtk();
 }
 
 function enemyAction() {
@@ -199,7 +197,7 @@ function enemyAtk(choice) {
         console.log("miss");
         var txt = nMons[npcMon]['name'] + " missed!";
         battleWriter(txt, 'message');
-        setTimeout(swapTurn, 2000)
+        setTimeout(swapTurn, 1000)
     }
 }
 
@@ -228,7 +226,7 @@ function playerAtk() {
         console.log("miss");
         var txt = pMons[currentMon]['name'] + " missed!";
         battleWriter(txt, 'message');
-        setTimeout(swapTurn, 2000)
+        setTimeout(swapTurn, 1000)
     }
 }
 
