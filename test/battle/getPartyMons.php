@@ -84,7 +84,7 @@ while($val = mysqli_fetch_assoc($result)) {
 foreach($rows as $row) {
     // need to query and get type, name, imgPath.    
     $mid = $row['monID'];
-    $sql = "SELECT imgPath, type1, type2 FROM mons WHERE monID = '$mid'";
+    $sql = "SELECT name, imgPath, type1, type2 FROM mons WHERE monID = '$mid'";
     $result = mysqli_query($conn, $sql);
     $vals = mysqli_fetch_assoc($result);
 ?>
@@ -100,11 +100,34 @@ foreach($rows as $row) {
         'sDef' : '<?php echo $row['sDef']; ?>',
         'speed' : '<?php echo $row['speed']; ?>',
         'status' : '<?php echo $row['status']; ?>',
-        'attacks' : {
-            'atk1' : '<?php echo $row['atk1']; ?>', 
-            'atk2' : '<?php echo $row['atk2']; ?>', 
-            'atk3' : '<?php echo $row['atk3']; ?>', 
-            'atk4' : '<?php echo $row['atk4']; ?>'
+        'attacks' : {<?php
+            $atk1 = $row['atk1'];
+            $atk2 = $row['atk2'];
+            $atk3 = $row['atk3'];
+            $atk4 = $row['atk4'];
+            $sql = "SELECT * FROM attacks WHERE atkID = '$atk1' OR atkID = '$atk2' OR atkID = '$atk3' OR atkID = '$atk4'";
+            $result = mysqli_query($conn, $sql);
+            $atkRows = array();
+            while($aRow = mysqli_fetch_assoc($result)) {
+                $atkRows[] = $aRow;
+            }
+            $i = 1;
+            foreach($atkRows as $atkRow) {
+                echo $i; ?> : {
+                    'name' : '<?php echo $atkRow['name']; ?>',
+                    'dmg' : '<?php echo $atkRow['dmg']; ?>',
+                    'acc' : '<?php echo $atkRow['acc']; ?>',
+                    'crit' : '<?php echo $atkRow['crit'] ?>',
+                    'type' : '<?php echo $atkRow['type'] ?>',
+                    'special' : '<?php echo $atkRow['special'] ?>',
+                    'e1' : '<?php echo $atkRow['effect1'] ?>',
+                    'e2' : '<?php echo $atkRow['effect2'] ?>',
+                    'e3' : '<?php echo $atkRow['effect3'] ?>',
+                    'contact' : '<?php echo $atkRow['contact']; ?>'
+                },
+            <?php
+                $i++;
+            }?>
         },
         'perk1' : '<?php echo $row['perk1']; ?>',
         'perk2' : '<?php echo $row['perk2']; ?>',

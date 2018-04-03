@@ -16,16 +16,19 @@ include_once("getPartyMons.php");
 ?>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container">
     <div class="row align-items-center">
         <div class="col-6" align="center">
+            <div class="d-block">
+                <h4 id="enemy-name"></h4>
+            </div>
             <div class="d-block">
                 <div class="progress">
                     <div id="enemy-health" class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="" aria-valuemin="0" aria-valuemax=""></div>
                 </div>
             </div>
             <div class="d-block">
-                <p id="enemy-status">Status</p>
+                <p id="enemy-status"></p>
             </div>
         </div> 
         <div id="enemy-mon-portrait-container" class="col-6" align="center">
@@ -38,16 +41,19 @@ include_once("getPartyMons.php");
         </div> 
         <div class="col-6" align="center">
             <div class="d-block">
+                <h4 id="player-name"></h4>
+            </div>
+            <div class="d-block">
                 <div class="progress">
                     <div id="player-health" class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="" aria-valuemin="0" aria-valuemax=""></div>
                 </div>
             </div>
             <div class="d-block">
-                <p id="player-status">Status</p>
+                <p id="player-status"></p>
             </div>
         </div>
     </div>
-    <div class=" row justify-content-center">
+    <div class="row justify-content-center">
         <div id="battle-command-container" class="col-sm-6">
             <div class="d-block" align="center">
                 <div class="d-inline">
@@ -67,7 +73,7 @@ include_once("getPartyMons.php");
             </div>
         </div>
     </div>
-    <div class=" row justify-content-center">
+    <div class="row justify-content-center">
         <div id="attack-container" class="col-sm-6">
             <div class="d-block" align="center">
                 <div class="d-inline">
@@ -88,6 +94,11 @@ include_once("getPartyMons.php");
             <div align="center">
                 <button id="back-btn" class="btn btn-outline-secondary">-></button>
             </div>
+        </div>
+    </div>
+    <div class=" row justify-content-center">
+        <div id="text-container" class="col-sm-6">
+            <h4 id="message"></h4>
         </div>
     </div>
 </div>
