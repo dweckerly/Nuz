@@ -4,9 +4,18 @@ var atkChoice = 1;
 var npcMon = 1;
 var npcAtk = 1;
 var turn = 'player';
-var sameSpd = 0;
+var action = 0;
+
+var pAction;
+var eAction;
 
 var typeSpeed = 50;
+var typeTimeout = 1500;
+
+var pMonMods = { 'atk': 1, 'def': 1, 'sAtk': 1, 'sDef': 1, 'speed': 1, 'acc': 1, 'crit': 1 };
+var nMonMods = { 'atk': 1, 'def': 1, 'sAtk': 1, 'sDef': 1, 'speed': 1, 'acc': 1, 'crit': 1 };
+
+var critMod = 2;
 
 document.ready = initialize();
 
@@ -46,17 +55,22 @@ function initialize() {
 
     statusCheck();
     populatePlayerAttacks();
+    startRound();
+}
+
+function startRound() {
     speedCheck();
-    startTurn();
+    $('#text-container').hide();
+    $('#attack-container').hide();
+    $('#battle-command-container').show();
 }
 
 function speedCheck() {
-    if (pMons[currentMon]['speed'] < nMons[npcMon]['speed']) {
+    if ((pMons[currentMon]['speed'] * pMonMods['speed']) < (nMons[npcMon]['speed'] * nMonMods['speed'])) {
         turn = 'enemy';
-    } else if (pMons[currentMon]['speed'] > nMons[npcMon]['speed']) {
+    } else if ((pMons[currentMon]['speed'] * pMonMods['speed']) > (nMons[npcMon]['speed'] * nMonMods['speed'])) {
         turn = 'player';
-    } else if (pMons[currentMon]['speed'] == nMons[npcMon]['speed']) {
-        sameSpd = 1;
+    } else if ((pMons[currentMon]['speed'] * pMonMods['speed']) == (nMons[npcMon]['speed'] * nMonMods['speed'])) {
         whoseTurn();
     }
 }
@@ -67,30 +81,6 @@ function whoseTurn() {
         turn = 'enemy'
     } else if (rand == 1) {
         turn = 'player';
-    }
-}
-
-function startTurn() {
-    if (turn == 'player') {
-        console.log(pMons[currentMon]['name']);
-        $('#text-container').hide();
-        $('#battle-command-container').show();
-    } else if (turn == 'enemy') {
-        console.log(nMons[npcMon]['name']);
-        $('#battle-command-container').hide();
-        enemyAction();
-    }
-}
-
-function swapTurn() {
-    if (turn == 'player') {
-        turn = 'enemy';
-        console.log(turn);
-        startTurn();
-    } else if (turn == 'enemy') {
-        turn = 'player';
-        console.log(turn);
-        startTurn();
     }
 }
 
@@ -108,7 +98,6 @@ function statusCheck() {
 }
 
 function populatePlayerAttacks() {
-    $('#attack-container').hide();
     $('#atk-1').html(pMons[currentMon]['attacks'][1]['name']);
     $('#atk-1').click(function() {
         atkClick(1);
@@ -145,25 +134,57 @@ function populatePlayerAttacks() {
     }
 }
 
+function startTurn() {
+    $('#text-container').show();
+    if (turn == 'player') {
+        playerAction(pAction);
+    } else if (turn == 'enemy') {
+        enemyAction();
+    }
+}
+
+function swapTurn() {
+    if (turn == 'player') {
+        turn = 'enemy'
+    } else if (turn == 'enemy') {
+        turn = 'player'
+    }
+    if (action == 0) {
+        action++;
+        startTurn();
+    } else {
+        action = 0;
+        startRound();
+    }
+}
+
 function atkClick(num) {
     $('#attack-container').hide();
     atkChoice = num;
-    playerAtk();
+    pAction = 'attack';
+    startTurn();
+}
+
+function playerAction(action) {
+    // will add conditions here for later options...
+    if (action == 'attack') {
+        attack(atkChoice);
+    }
 }
 
 function enemyAction() {
     var choice = 1;
     // need to determine AI for action choice here
-    enemyAtk(choice);
+    attack(choice);
 }
 
-function battleWriter(text, id) {
-    document.getElementById(id).innerHTML = "";
+function battleWriter(text) {
+    document.getElementById('message').innerHTML = "";
     $('#text-container').show();
     var i = 0;
     var typeEffect = setInterval(function() {
         if (i < text.length) {
-            document.getElementById(id).innerHTML += text.charAt(i);
+            document.getElementById('message').innerHTML += text.charAt(i);
             i++;
         } else {
             clearInterval(typeEffect);
@@ -171,63 +192,52 @@ function battleWriter(text, id) {
     }, typeSpeed);
 }
 
-function enemyAtk(choice) {
-    var miss = Math.floor(Math.random() * 100);
-    if (miss <= nMons[npcMon]['attacks'][choice]['acc']) {
-        // hit
-        if (nMons[npcMon]['attacks'][choice]['special'] == 0) {
-            var dmg = Math.round((nMons[npcMon]['atk'] / pMons[currentMon]['def']) * nMons[npcMon]['attacks'][choice]['dmg']);
-        } else if (pMons[currentMon]['attacks'][atkChoice]['special'] == 1) {
-            var dmg = Math.round((nMons[npcMon]['sAtk'] / pMons[currentMon]['sDef']) * nMons[npcMon]['attacks'][choice]['dmg']);
-        }
-        var crit = Math.floor(Math.random() * 100);
-        if (crit < nMons[npcMon]['attacks'][choice]['crit']) {
-            dmg = dmg * 2;
-            var txt = nMons[npcMon]['name'] + " used " + nMons[npcMon]['attacks'][choice]['name'] + "! Critical hit!";
-        } else {
-            var txt = nMons[npcMon]['name'] + " used " + nMons[npcMon]['attacks'][choice]['name'] + "!";
-        }
-        console.log(dmg);
-        var txt = nMons[npcMon]['name'] + " used " + nMons[npcMon]['attacks'][choice]['name'] + "!";
-        battleWriter(txt, 'message');
-        setTimeout(function() { decreaseHealth(dmg, '#player-health'); }, 1000)
-    } else {
-        // miss
-        // need to broadcast a message here that there was a miss...
-        console.log("miss");
-        var txt = nMons[npcMon]['name'] + " missed!";
-        battleWriter(txt, 'message');
-        setTimeout(swapTurn, 1000)
+function attack(atkNum) {
+    if (turn == 'player') {
+        var atkMonArr = pMons;
+        var atkMonNum = currentMon;
+        var atkMonMod = pMonMods;
+        var defMonArr = nMons;
+        var defMonNum = npcMon;
+        var defMonMod = nMonMods;
+        var bar = '#enemy-health';
+    } else if (turn == 'enemy') {
+        var atkMonArr = nMons;
+        var atkMonNum = npcMon;
+        var atkMonMod = nMonMods;
+        var defMonArr = pMons;
+        var defMonNum = currentMon;
+        var defMonMod = pMonMods;
+        var bar = '#player-health';
     }
-}
-
-function playerAtk() {
-    var miss = Math.floor(Math.random() * 100);
-    if (miss <= pMons[currentMon]['attacks'][atkChoice]['acc']) {
-        // hit
-        if (pMons[currentMon]['attacks'][atkChoice]['special'] == 0) {
-            var dmg = Math.round((pMons[currentMon]['atk'] / nMons[npcMon]['def']) * pMons[currentMon]['attacks'][atkChoice]['dmg']);
-        } else if (pMons[currentMon]['attacks'][atkChoice]['special'] == 1) {
-            var dmg = Math.round((pMons[currentMon]['sAtk'] / nMons[npcMon]['sDef']) * pMons[currentMon]['attacks'][atkChoice]['dmg']);
-        }
-        var crit = Math.floor(Math.random() * 100);
-        if (crit < pMons[currentMon]['attacks'][atkChoice]['crit']) {
-            dmg = dmg * 2;
-            var txt = pMons[currentMon]['name'] + " used " + pMons[currentMon]['attacks'][atkChoice]['name'] + "! Critical hit!";
+    var txt = atkMonArr[atkMonNum]['name'] + " used " + atkMonArr[atkMonNum]['attacks'][atkNum]['name'] + "!";
+    battleWriter(txt);
+    setTimeout(function() {
+        var miss = Math.floor(Math.random() * 100);
+        if (miss <= (atkMonArr[atkMonNum]['attacks'][atkMonNum]['acc'] * atkMonMod['acc'])) {
+            if (atkMonArr[atkMonNum]['attacks'][atkNum]['special'] == 0) {
+                var dmg = Math.round(((atkMonArr[atkMonNum]['atk'] * atkMonMod['atk']) / (defMonArr[defMonNum]['def'] * defMonMod['def'])) * atkMonArr[atkMonNum]['attacks'][atkNum]['dmg']);
+            } else if (atkMonArr[atkMonNum]['attacks'][atkNum]['special'] == 1) {
+                var dmg = Math.round(((atkMonArr[atkMonNum]['sAtk'] * atkMonMod['sAtk']) / (defMonArr[defMonNum]['sDef'] * defMonMod['sDef'])) * atkMonArr[atkMonNum]['attacks'][atkNum]['dmg']);
+            }
+            var crit = Math.floor(Math.random() * 100);
+            if (crit >= (atkMonArr[atkMonNum]['attacks'][atkNum]['crit'] * atkMonMod['crit'])) {
+                decreaseHealth(dmg, bar);
+            } else {
+                txt = "Critical hit!"
+                battleWriter(txt);
+                setTimeout(function() {
+                    decreaseHealth(dmg * critMod, bar);
+                }, typeTimeout)
+            }
         } else {
-            var txt = pMons[currentMon]['name'] + " used " + pMons[currentMon]['attacks'][atkChoice]['name'] + "!";
+            txt = atkMonArr[atkMonNum]['name'] + " missed!";
+            battleWriter(txt);
+            setTimeout(function() {
+                swapTurn();
+            }, typeTimeout)
         }
-        console.log(dmg);
-        battleWriter(txt, 'message');
-        setTimeout(function() { decreaseHealth(dmg, '#enemy-health'); }, 1000)
-    } else {
-        // miss
-        // need to broadcast a message here that there was a miss...
-        console.log("miss");
-        var txt = pMons[currentMon]['name'] + " missed!";
-        battleWriter(txt, 'message');
-        setTimeout(swapTurn, 1000)
-    }
+    }, typeTimeout);
 }
 
 function decreaseHealth(dmg, bar) {
@@ -241,7 +251,7 @@ function decreaseHealth(dmg, bar) {
     var w = "width:" + barW + "%";
     $(bar).attr('style', w);
     $(bar).attr('aria-valuenow', val);
-    swapTurn();
+    setTimeout(swapTurn, typeTimeout);
 }
 
 function ko() {
