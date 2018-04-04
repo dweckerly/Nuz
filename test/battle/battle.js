@@ -18,6 +18,7 @@ var nMonMods = { 'atk': 1, 'def': 1, 'sAtk': 1, 'sDef': 1, 'speed': 1, 'acc': 1,
 var atkMonArr;
 var atkMonNum;
 var atkMonMod;
+var atkNum;
 var defMonArr;
 var defMonNum;
 var defMonMod;
@@ -158,11 +159,11 @@ function priorityEffCheck() {
     var pQuick = 0;
     var nQuick = 0;
     //check for if player mon used a prioroty attack
-    if((pMons[currentMon]['attacks'][atkChoice]['effect1'].indexOf('quick') >= 0) || (pMons[currentMon]['attacks'][atkChoice]['effect2'].indexOf('quick') >= 0) || (pMons[currentMon]['attacks'][atkChoice]['effect3'].indexOf('quick') >= 0)) {
+    if(pMons[currentMon]['attacks'][atkChoice]['priority'] == 1) {
         pQuick = 1;
     } 
     // check if npc mon used a priority attack
-    if((nMons[npcMon]['attacks'][npcAtk]['effect1'].indexOf('quick') >= 0) || (nMons[npcMon]['attacks'][npcAtk]['effect2'].indexOf('quick') >= 0) || (nMons[npcMon]['attacks'][npcAtk]['effect3'].indexOf('quick') >= 0)) {
+    if(nMons[npcMon]['attacks'][npcAtk]['priority'] == 1) {
         nQuick = 1;
     } 
 
@@ -233,7 +234,7 @@ function attack() {
         defMonNum = npcMon;
         defMonMod = nMonMods;
         bar = '#enemy-health';
-        var atkNum = atkChoice;
+        atkNum = atkChoice;
     } else if (turn == 'enemy') {
         atkMonArr = nMons;
         atkMonNum = npcMon;
@@ -242,7 +243,7 @@ function attack() {
         defMonNum = currentMon;
         defMonMod = pMonMods;
         bar = '#player-health';
-        var atkNum = npcAtk;
+        atkNum = npcAtk;
     }
     var txt = atkMonArr[atkMonNum]['name'] + " used " + atkMonArr[atkMonNum]['attacks'][atkNum]['name'] + "!";
     battleWriter(txt);
@@ -252,7 +253,7 @@ function attack() {
         var miss = Math.floor(Math.random() * 100);
         if (miss <= (atkMonArr[atkMonNum]['attacks'][atkMonNum]['acc'] * atkMonMod['acc'])) {
             // check for attacks that don't do damage
-            if(atkMonArr[atkMonNum]['attacks'][atkNum][dmg] == 0) {
+            if(atkMonArr[atkMonNum]['attacks'][atkNum]['dmg'] == 0) {
                 setTimeout(effectCheck, typeTimeout);
             } else {
                 // check for attacks that do damage
@@ -276,7 +277,11 @@ function attack() {
                 }
             }
         } else {
-            txt = atkMonArr[atkMonNum]['name'] + " missed!";
+            if(atkMonArr[atkMonNum]['attacks'][atkNum]['dmg'] == 0) {
+                txt = "It failed!";
+            } else {
+                txt = atkMonArr[atkMonNum]['name'] + " missed!";
+            }
             battleWriter(txt);
             setTimeout(function() {
                 swapTurn();
@@ -286,29 +291,101 @@ function attack() {
 }
 
 function effectCheck(){
-    if(atkMonArr[atkMonNum]['attacks'][atkChoice]['effect1'] == '') {
+    if(atkMonArr[atkMonNum]['attacks'][atkNum]['e1'] == '') {
         // no effects, call swapTurn without a timeout
+        console.log('no effect')
         swapTurn();
     } else {
-        var eff = Array();
-        eff[0] = atkMonArr[atkMonNum]['attacks'][atkChoice]['effect1'];
-        if(atkMonArr[atkMonNum]['attacks'][atkChoice]['effect2'] != '') {
-            eff[1] = atkMonArr[atkMonNum]['attacks'][atkChoice]['effect2'];
+        var eff = [atkMonArr[atkMonNum]['attacks'][atkNum]['e1']];
+        console.log(eff);
+        if(atkMonArr[atkMonNum]['attacks'][atkNum]['e2'] != '') {
+            eff.push(atkMonArr[atkMonNum]['attacks'][atkNum]['e2']);
         }  
-        if(atkMonArr[atkMonNum]['attacks'][atkChoice]['effect3'] != '') {
-            eff[2] = atkMonArr[atkMonNum]['attacks'][atkChoice]['effect3'];
+        if(atkMonArr[atkMonNum]['attacks'][atkNum]['e3'] != '') {
+            eff.push(atkMonArr[atkMonNum]['attacks'][atkNum]['e3']);
         }
         // pass effect array, set interval to play each effect similar to typeWriter
         applyEffects(eff);
     }
-    setTimeout(swapTurn, typeTimeout);
 }
 
 function applyEffects(eff) {
+    var i = 0;
+    var txt = "";
+    var effects = setInterval( function() {
+        if(i < eff.length) {
+            console.log(eff[i]);
+            var effParse = String(eff[i]).split('-');
 
+            // check for buff or nerf
+            if(effParse[0] == 'increase') {
+                if(effParse[2] == 'self') {
+                    if(atkMonMod[effParse[1]] >= 2.2) {
+                        //can't increase anymore
+                        txt = atkMonArr[atkMonNum]['name'] + "'s " + effParse[1].toUpperCase() + " can't go any higher!";
+                    } else {
+                        atkMonMod[effParse[1]] += (0.2 * effParse[3]);
+                        if(atkMonMod[effParse[1]] >= 2.2) {
+                            atkMonMod[effParse[1]] = 2.2;
+                        }
+                        txt = atkMonArr[atkMonNum]['name'] + "'s " + effParse[1].toUpperCase() + " increased!";
+                    }
+                } else if(effParse[2] == 'target') {
+                    if(defMonMod[effParse[1]] >= 2.2) {
+                        //can't increase anymore
+                        txt = defMonArr[defMonNum]['name'] + "'s " + effParse[1].toUpperCase() + " can't go any higher!";
+                    } else {
+                        defMonMod[effParse[1]] += (0.2 * effParse[3]);
+                        if(defMonMod[effParse[1]] >= 2.2) {
+                            defMonMod[effParse[1]] = 2.2;
+                        }
+                        txt = defMonArr[defMonNum]['name'] + "'s " + effParse[1].toUpperCase() + " increased!";
+                    }
+                }
+            } else if (effParse[0] == 'decrease') {
+                if(effParse[2] == 'self') {
+                    if(atkMonMod[effParse[1]] <= 0.4) {
+                        //can't increase anymore
+                        txt = atkMonArr[atkMonNum]['name'] + "'s " + effParse[1].toUpperCase() + " can't go any lower!";
+                    } else {
+                        atkMonMod[effParse[1]] -= (0.1 * effParse[3]);
+                        if(atkMonMod[effParse[1]] < 0.4) {
+                            atkMonMod[effParse[1]] = 0.4;
+                        }
+                        txt = atkMonArr[atkMonNum]['name'] + "'s " + effParse[1].toUpperCase() + " decreased!";
+                    }
+                } else if(effParse[2] == 'target') {
+                    if(defMonMod[effParse[1]] <= 0.4) {
+                        //can't increase anymore
+                        txt = defMonArr[defMonNum]['name'] + "'s " + effParse[1].toUpperCase() + " can't go any lower!";
+                    } else {
+                        defMonMod[effParse[1]] -= (0.1 * effParse[3]);
+                        if(defMonMod[effParse[1]] < 0.4) {
+                            defMonMod[effParse[1]] = 0.4;
+                        }
+                        txt = defMonArr[defMonNum]['name'] + "'s " + effParse[1].toUpperCase() + " decreased!";
+                    }
+                }
+            }
+
+            // check for recoil
+            if(effParse[0] == 'recoil') {
+                var dmg = Math.round(atkMonArr[atkMonNum]['attacks'][atkNum]['dmg'] * (effParse[1] / 100));
+                txt = atkMonArr[atkMonNum]['name'] + " took recoil damage!";
+                recoilDamage(dmg);
+            }
+
+            battleWriter(txt);
+            i++;
+        } else {
+            clearInterval(effects);
+            swapTurn();
+        }
+    }, typeTimeout);
 }
 
 function decreaseHealth(dmg, bar) {
+    console.log(dmg);
     var valNow = $(bar).attr('aria-valuenow');
     var maxVal = $(bar).attr('aria-valuemax');
     var val = valNow - dmg;
@@ -321,6 +398,27 @@ function decreaseHealth(dmg, bar) {
     $(bar).attr('aria-valuenow', val);
     setTimeout(effectCheck, typeTimeout);
 }
+
+function recoilDamage(dmg) {
+    // need to swap bar
+    console.log(dmg);
+    if(bar == '#player-health') {
+        bar = '#enemy-health';
+    } else if (bar == '#enemy-health') {
+        bar = '#player-health';
+    }
+    var valNow = $(bar).attr('aria-valuenow');
+    var maxVal = $(bar).attr('aria-valuemax');
+    var val = valNow - dmg;
+    if (val < 0) {
+        val = 0;
+    }
+    var barW = Math.round((val / maxVal) * 100);
+    var w = "width:" + barW + "%";
+    $(bar).attr('style', w);
+    $(bar).attr('aria-valuenow', val);
+}
+
 
 function ko() {
     console.log("Knock out.");

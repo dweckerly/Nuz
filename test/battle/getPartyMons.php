@@ -55,7 +55,8 @@ foreach($rows as $row) {
                     'e1' : '<?php echo $atkRow['effect1'] ?>',
                     'e2' : '<?php echo $atkRow['effect2'] ?>',
                     'e3' : '<?php echo $atkRow['effect3'] ?>',
-                    'contact' : '<?php echo $atkRow['contact']; ?>'
+                    'contact' : '<?php echo $atkRow['contact']; ?>',
+                    'priority' : '<?php echo $atkRow['priority']; ?>'
                 },
             <?php
                 $i++;
@@ -123,7 +124,8 @@ foreach($rows as $row) {
                     'e1' : '<?php echo $atkRow['effect1'] ?>',
                     'e2' : '<?php echo $atkRow['effect2'] ?>',
                     'e3' : '<?php echo $atkRow['effect3'] ?>',
-                    'contact' : '<?php echo $atkRow['contact']; ?>'
+                    'contact' : '<?php echo $atkRow['contact']; ?>',
+                    'priority' : '<?php echo $atkRow['priority']; ?>'
                 },
             <?php
                 $i++;
