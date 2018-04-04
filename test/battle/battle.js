@@ -211,6 +211,12 @@ function enemyAction() {
     attack();
 }
 
+function statusCheck(monArr, monNum) {
+    if(monArr[monNum]['status'] != 'normal') {
+        // do stuff...
+    }
+}
+
 function battleWriter(text) {
     document.getElementById('message').innerHTML = "";
     $('#text-container').show();
@@ -375,6 +381,15 @@ function applyEffects(eff) {
                 recoilDamage(dmg);
             }
 
+            // check for burn, wound, poison, etc.
+            if((effParse[0] == 'burn') || (effParse[0] == 'wound') || (effParse[0] == 'poison')) {
+                var chance = Math.floor(Math.random() * 100);
+                if(chance < effParse[1]) {
+                    addState(effParse[0]);
+                    txt = defMonArr[defMonNum]['name'] + " was " + effParse[0] + "ed!";
+                }
+            }
+
             battleWriter(txt);
             i++;
         } else {
@@ -417,6 +432,14 @@ function recoilDamage(dmg) {
     var w = "width:" + barW + "%";
     $(bar).attr('style', w);
     $(bar).attr('aria-valuenow', val);
+}
+
+function addState(state){
+    if(defMonArr[defMonNum]['status'] == 'normal') {
+        defMonArr[defMonNum]['status'] = state;
+    } else {
+        defMonArr[defMonNum]['status'] += "-" + state;
+    }
 }
 
 
