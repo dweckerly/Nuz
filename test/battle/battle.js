@@ -24,7 +24,6 @@ var defMonNum;
 var defMonMod;
 var bar;
 
-
 var critMod = 2;
 
 document.ready = initialize();
