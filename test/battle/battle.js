@@ -267,12 +267,14 @@ function attack() {
 
         var miss = Math.floor(Math.random() * 100);
         if (miss <= (atkMonArr[atkMonNum]['attacks'][atkMonNum]['acc'] * atkMonMod['acc'])) {
-                    /* * * * * * * * * * * * * * * * * * */
-                    /* need to do type checking for the attacks... 
-                    /* Once I figure out how the type system works...
-                    /* doing it here in the case of invulnerability
-                    /* dmg = typeCheck(dmg);
-                    /* * * * * * * * * * * * * * * * * * */
+            
+            /* * * * * * * * * * * * * * * * * * */
+            /* need to do type checking for the attacks... 
+            /* Once I figure out how the type system works...
+            /* doing it here in the case of invulnerability
+            /* var dmgMod;
+            /* dmgMod = typeCheck(dmg);
+            /* * * * * * * * * * * * * * * * * * */
             
             // check for attacks that don't do damage
             if(atkMonArr[atkMonNum]['attacks'][atkNum]['dmg'] == 0) {
