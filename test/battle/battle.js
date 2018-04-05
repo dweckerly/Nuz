@@ -62,16 +62,25 @@ function initialize() {
         // function to surrender the fight
     });
 
-    statusCheck();
+    statusDisplay();
     populatePlayerAttacks();
-    startRound();
+    actionSelect();
 }
 
-function startRound() {
-    speedCheck();
+function actionSelect() {
     $('#text-container').hide();
     $('#attack-container').hide();
     $('#battle-command-container').show();
+}
+
+function startRound() {
+    whoseTurn();
+    $('#text-container').show();
+    if (turn == 'player') {
+        playerAction(pAction);
+    } else if (turn == 'enemy') {
+        enemyAction();
+    }
 }
 
 function speedCheck() {
@@ -80,11 +89,11 @@ function speedCheck() {
     } else if ((pMons[currentMon]['speed'] * pMonMods['speed']) > (nMons[npcMon]['speed'] * nMonMods['speed'])) {
         turn = 'player';
     } else if ((pMons[currentMon]['speed'] * pMonMods['speed']) == (nMons[npcMon]['speed'] * nMonMods['speed'])) {
-        whoseTurn();
+        randTurn();
     }
 }
 
-function whoseTurn() {
+function randTurn() {
     var rand = Math.floor(Math.random() * 2);
     if (rand == 0) {
         turn = 'enemy'
@@ -93,7 +102,12 @@ function whoseTurn() {
     }
 }
 
-function statusCheck() {
+function whoseTurn() {
+    speedCheck();
+    priorityEffCheck();
+}
+
+function statusDisplay() {
     if (nMons[npcMon]['status'] == 'normal') {
         $('#enemy-status').text('-');
     } else {
@@ -145,13 +159,7 @@ function populatePlayerAttacks() {
 
 function startTurn() {
     // will need to do an effect check here for moves with priority
-    priorityEffCheck();
-    $('#text-container').show();
-    if (turn == 'player') {
-        playerAction(pAction);
-    } else if (turn == 'enemy') {
-        enemyAction();
-    }
+    
 }
 
 function priorityEffCheck() {
@@ -175,17 +183,18 @@ function priorityEffCheck() {
 }
 
 function swapTurn() {
-    if (turn == 'player') {
-        turn = 'enemy'
-    } else if (turn == 'enemy') {
-        turn = 'player'
-    }
     if (action == 0) {
         action++;
-        startTurn();
+        if (turn == 'player') {
+            turn = 'enemy'
+            enemyAction();
+        } else if (turn == 'enemy') {
+            turn = 'player'
+            playerAction(pAction);
+        }
     } else {
         action = 0;
-        startRound();
+        actionSelect();
     }
 }
 
@@ -193,7 +202,7 @@ function atkClick(num) {
     $('#attack-container').hide();
     atkChoice = num;
     pAction = 'attack';
-    startTurn();
+    startRound();
 }
 
 function playerAction(action) {
@@ -213,6 +222,7 @@ function enemyAction() {
 function statusCheck(monArr, monNum) {
     if(monArr[monNum]['status'] != 'normal') {
         // do stuff...
+        statusDisplay();
     }
 }
 
@@ -257,6 +267,13 @@ function attack() {
 
         var miss = Math.floor(Math.random() * 100);
         if (miss <= (atkMonArr[atkMonNum]['attacks'][atkMonNum]['acc'] * atkMonMod['acc'])) {
+                    /* * * * * * * * * * * * * * * * * * */
+                    /* need to do type checking for the attacks... 
+                    /* Once I figure out how the type system works...
+                    /* doing it here in the case of invulnerability
+                    /* dmg = typeCheck(dmg);
+                    /* * * * * * * * * * * * * * * * * * */
+            
             // check for attacks that don't do damage
             if(atkMonArr[atkMonNum]['attacks'][atkNum]['dmg'] == 0) {
                 setTimeout(effectCheck, typeTimeout);
@@ -395,7 +412,7 @@ function applyEffects(eff) {
             clearInterval(effects);
             swapTurn();
         }
-    }, typeTimeout);
+    }, typeTimeout + 500);
 }
 
 function decreaseHealth(dmg, bar) {
