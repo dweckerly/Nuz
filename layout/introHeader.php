@@ -15,6 +15,7 @@
     <script src="../js/ajax.js"></script>
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/uiEffects.js"></script>
+    <script src="../js/gameUtil.js"></script>
     
 </head>
 <body>

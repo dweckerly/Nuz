@@ -27,13 +27,16 @@ var txt2 = ['Whadaya say you give that little critter a name, huh?'];
 
 // add stuff about catching nuzmon
 var txt3 = ["Suppose all you need now is... more 'mons!",
-    ""
+    "Only way to get 'em is to go out an catch 'em!",
+    "I think we got a couple sacks layin' around here you can have..."
 ];
 
 // go over battle? have battle?
 var txt4 = ["",
     ""
 ];
+
+var txt5 = ["", ""];
 
 
 nameBtn.addEventListener("click", function() {
@@ -80,7 +83,7 @@ function start(txt) {
             openModal(modals[modalIndex]);
             modalIndex++;
         } else if (state == 5) {
-            giveTrap();
+            giveSack();
         } else if (state == 6) {
 
         }
@@ -156,14 +159,7 @@ function moreExposition() {
 
 // will need to write php script as well as decide how 
 // to display the notification to the player.
-function giveTrap() {
-    var data = "id=0";
-    postXHR("../util/giveItem.php", data, function(response) {
-        var json = JSON.parse(response);
-        document.getElementById().innerHTML = json['name'];
-        document.getElementById().src = json['imgPath'];
-        $().modal();
-        state = 6;
-        document.body.addEventListener("click", nextText());
-    });
+function giveSack() {
+    giveItem('1', '3');
+    state = 6;
 }

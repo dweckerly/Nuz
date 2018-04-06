@@ -10,10 +10,11 @@ if(!isset($_POST['id'])) {
     echo json_encode($row);
 
     if(isset($_POST['q'])) {
-        $q = $id = mysqli_real_escape_string($conn, $_POST['q']);
+        $q = mysqli_real_escape_string($conn, $_POST['q']);
     } else {
         $q = 1;
     }
+    session_start();
     $pid = $_SESSION['pid'];
     $sql = "INSERT INTO ownedItems (itemID, playerID, quantity) VALUES ('$id', '$pid', '$q')";
     mysqli_query($conn, $sql);
