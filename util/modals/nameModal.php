@@ -4,7 +4,7 @@
     <div class='modal-dialog modal-dialog-centered'>
         <div class='modal-content'>
             <div class='modal-body' align='center'>
-                <form class='name-form'>
+                <form class='name-form' onsubmit="return false">
                     <div class='form-group'>
                         <input class="input" id="nameTxt" type='text' name='name' placeholder='Your name'>
                     </div>

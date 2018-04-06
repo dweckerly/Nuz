@@ -3,11 +3,11 @@ var target = document.getElementById("testTarget");
 
 var data = "id=1";
 var response;
-btn.addEventListener("click", function () { 
+btn.addEventListener("click", function() {
     postXHR("../test/getSomething.php", data, changeData);
 });
 
 function changeData(data) {
-    target.innerHTML = data;
+    var obj = JSON.parse(data);
+    target.innerHTML = obj.name;
 }
-

@@ -1,11 +1,19 @@
+var quantity
+
 function giveItem(id, q) {
+    quantity = q;
     var data = "id=" + id + "&q=" + q;
     postXHR('../util/giveItem.util.php', data, itemModal);
 }
 
 function itemModal(data) {
-    $('#itemImg').attr('src', data['imgPath']);
-    $('#itemName').html(data['name']);
-    $('#itemDescription').html(data['description']);
+    var obj = JSON.parse(data);
+    $('#itemImg').attr('src', obj.imgPath);
+    if (quantity > 1) {
+        $('#itemName').html("You received " + quantity + " " + obj.name + "s!");
+    } else {
+        $('#itemName').html("You received a " + obj.name);
+    }
+    $('#itemDescription').html(obj.description);
     $('#itemModal').modal();
 }

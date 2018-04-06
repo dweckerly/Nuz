@@ -5,7 +5,7 @@
                 <h5 id="itemName"></h5>
                 <div class="row">
                     <div class="col">
-                        <img id="itemImg" height="64" width="64" src="">
+                        <img id="itemImg" height="128" width="128" src="">
                     </div>
                     <div class="col">
                         <p id='itemDescription'></p>

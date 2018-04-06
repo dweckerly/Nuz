@@ -5,10 +5,10 @@
                 <h5 id="namePrompt"></h5>
                 <div class="row">
                     <div class="col">
-                        <img id="monImg" height="64" width="64" src="">
+                        <img id="monImg" height="128" width="128" src="">
                     </div>
                     <div class="col">
-                        <form class='name-form'>
+                        <form class='name-form' onsubmit="return false">
                             <div class='form-group'>
                                 <input class="input" id="nameMonTxt" type='text' name='name' placeholder='Your name'>
                             </div>
