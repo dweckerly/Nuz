@@ -32,5 +32,6 @@ include_once("../util/modals/nameMonModal.php");
             </div>
         </div>
     </section>
+    <script src="../js/intro/startGame.js"></script>
 <?php
 include_once('../layout/gameFooter.php');
