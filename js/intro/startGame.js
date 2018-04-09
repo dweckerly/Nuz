@@ -109,7 +109,6 @@ function nextText() {
     } else if (state == 5) {
         start(txt3);
     } else if (state == 6) {
-        document.body.removeEventListener("click", nextText());
         start(txt4);
     }
 }
@@ -157,4 +156,5 @@ function moreExposition() {
 function giveSack() {
     giveItem('1', '3');
     state = 6;
+    nextText();
 }

@@ -56,6 +56,7 @@ function initialize() {
 
     $('#inv-btn').click(function() {
         // function to access inventory
+        $('inventoryModal').modal();
     });
 
     $('#sur-btn').click(function() {
@@ -94,7 +95,7 @@ function speedCheck() {
 }
 
 function randTurn() {
-    var rand = Math.floor(Math.random() * 2);
+    var rand = Math.round(Math.random());
     if (rand == 0) {
         turn = 'enemy'
     } else if (rand == 1) {
@@ -166,11 +167,11 @@ function priorityEffCheck() {
     var pQuick = 0;
     var nQuick = 0;
     //check for if player mon used a prioroty attack
-    if(pMons[currentMon]['attacks'][atkChoice]['priority'] == 1) {
+    if(pMons[currentMon]['attacks'][atkChoice]['priority'] > nMons[npcMon]['attacks'][npcAtk]['priority']) {
         pQuick = 1;
     } 
     // check if npc mon used a priority attack
-    if(nMons[npcMon]['attacks'][npcAtk]['priority'] == 1) {
+    if(nMons[npcMon]['attacks'][npcAtk]['priority'] > pMons[currentMon]['attacks'][atkChoice]['priority']) {
         nQuick = 1;
     } 
 
@@ -213,7 +214,7 @@ function playerAction(action) {
 }
 
 function enemyAction() {
-    var choice = 1;
+    var choice = Math.round(Math.random() + 1);
     // need to determine AI for action choice here
     npcAtk = choice
     attack();

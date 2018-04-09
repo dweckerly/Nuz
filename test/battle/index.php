@@ -102,6 +102,9 @@ include_once("getPartyMons.php");
         </div>
     </div>
 </div>
+<?php
+include_once("/util/modals/inventoryModal.php");
+?>
 <script src="battle.js"></script>
 </body>
 </html>
