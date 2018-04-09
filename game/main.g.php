@@ -3,11 +3,9 @@ include_once("../layout/gameHeader.php");
 ?>
 <div id="mainContainer">
     <div id="map">
-        <!-- currentlt just doing a 3 x 3 grid for the map-->
+        <!-- currently just doing a 3 x 3 grid for the map -->
         <div id="0" class="row">
-            <div id="0-0" class="col">
-                <button><i class="fa fa-anchor" style="font-size:36px"></i></button>
-            </div>
+            <div id="0-0" class="col"><button><i class="fa fa-anchor" style="font-size:36px"></i></button></div>
             <div id="0-1" class="col"><button><i class="fa fa-birthday-cake" style="font-size:36px"></i></button></div>
             <div id="0-2" class="col"><button><i class="fa fa-bug" style="font-size:36px"></i></button></div>
         </div>
