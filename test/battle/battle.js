@@ -68,46 +68,6 @@ function initialize() {
     actionSelect();
 }
 
-function actionSelect() {
-    $('#text-container').hide();
-    $('#attack-container').hide();
-    $('#battle-command-container').show();
-}
-
-function startRound() {
-    whoseTurn();
-    $('#text-container').show();
-    if (turn == 'player') {
-        playerAction(pAction);
-    } else if (turn == 'enemy') {
-        enemyAction();
-    }
-}
-
-function speedCheck() {
-    if ((pMons[currentMon]['speed'] * pMonMods['speed']) < (nMons[npcMon]['speed'] * nMonMods['speed'])) {
-        turn = 'enemy';
-    } else if ((pMons[currentMon]['speed'] * pMonMods['speed']) > (nMons[npcMon]['speed'] * nMonMods['speed'])) {
-        turn = 'player';
-    } else if ((pMons[currentMon]['speed'] * pMonMods['speed']) == (nMons[npcMon]['speed'] * nMonMods['speed'])) {
-        randTurn();
-    }
-}
-
-function randTurn() {
-    var rand = Math.round(Math.random());
-    if (rand == 0) {
-        turn = 'enemy'
-    } else if (rand == 1) {
-        turn = 'player';
-    }
-}
-
-function whoseTurn() {
-    speedCheck();
-    priorityEffCheck();
-}
-
 function statusDisplay() {
     if (nMons[npcMon]['status'] == 'normal') {
         $('#enemy-status').text('-');
@@ -156,6 +116,46 @@ function populatePlayerAttacks() {
             atkClick(4);
         });
     }
+}
+
+function actionSelect() {
+    $('#text-container').hide();
+    $('#attack-container').hide();
+    $('#battle-command-container').show();
+}
+
+function startRound() {
+    whoseTurn();
+    $('#text-container').show();
+    if (turn == 'player') {
+        playerAction(pAction);
+    } else if (turn == 'enemy') {
+        enemyAction();
+    }
+}
+
+function speedCheck() {
+    if ((pMons[currentMon]['speed'] * pMonMods['speed']) < (nMons[npcMon]['speed'] * nMonMods['speed'])) {
+        turn = 'enemy';
+    } else if ((pMons[currentMon]['speed'] * pMonMods['speed']) > (nMons[npcMon]['speed'] * nMonMods['speed'])) {
+        turn = 'player';
+    } else if ((pMons[currentMon]['speed'] * pMonMods['speed']) == (nMons[npcMon]['speed'] * nMonMods['speed'])) {
+        randTurn();
+    }
+}
+
+function randTurn() {
+    var rand = Math.round(Math.random());
+    if (rand == 0) {
+        turn = 'enemy'
+    } else if (rand == 1) {
+        turn = 'player';
+    }
+}
+
+function whoseTurn() {
+    speedCheck();
+    priorityEffCheck();
 }
 
 function startTurn() {
@@ -214,7 +214,7 @@ function playerAction(action) {
 }
 
 function enemyAction() {
-    var choice = Math.round(Math.random() + 1);
+    var choice = Math.floor(Math.random() * 3) + 1;
     // need to determine AI for action choice here
     npcAtk = choice
     attack();
@@ -310,7 +310,7 @@ function attack() {
             battleWriter(txt);
             setTimeout(function() {
                 swapTurn();
-            }, typeTimeout)
+            }, typeTimeout);
         }
     }, typeTimeout);
 }
@@ -425,6 +425,7 @@ function decreaseHealth(dmg, bar) {
     var val = valNow - dmg;
     if (val < 0) {
         val = 0;
+        ko();
     }
     var barW = Math.round((val / maxVal) * 100);
     var w = "width:" + barW + "%";
@@ -460,7 +461,6 @@ function addState(state){
         defMonArr[defMonNum]['status'] += "-" + state;
     }
 }
-
 
 function ko() {
     console.log("Knock out.");
