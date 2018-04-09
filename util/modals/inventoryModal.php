@@ -33,6 +33,3 @@ foreach($rows as $row) {
         </div>
     </div>
 </div>
-
-
-<script src="/js/gameUtil.js"></script>

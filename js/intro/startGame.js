@@ -17,8 +17,7 @@ var txt0 = ['Howdy pardner! This is The Ranch. It was left to you by your long-l
     "What's your name?"
 ];
 
-var ntxt0 = [""];
-var ntxt1 = ["", ""];
+var ntxt = [];
 
 var txt1 = ["Whadaya say we find you a pardner? It's been tough times around here and we only got three 'mons left.",
     "Go ahead and choose one to take with you."
@@ -44,17 +43,15 @@ nameBtn.addEventListener("click", function() {
     var inputName = document.getElementById('nameTxt').value;
     if (inputName.length == 0) {
         playerName = "Bob";
-        ntxt1 = ["Silent type, huh? Guess I'll just call you... " + playerName + ".",
+        ntxt = ["Silent type, huh? Guess I'll just call you... " + playerName + ".",
             "Don't worry though, you can change your name later."
         ];
-        state = 2;
-        nextText();
     } else {
         playerName = document.getElementById('nameTxt').value;
-        ntxt0 = ["Well, nice to meet you, " + playerName + "! Officially and all."];
-        state = 1;
-        nextText();
+        ntxt = ["Well, nice to meet you, " + playerName + "! Officially and all."];
     }
+    state = 1;
+    nextText();
 });
 
 $(document).ready(function() {
@@ -102,9 +99,9 @@ function nextText() {
     if (state == 0) {
         start(txt0);
     } else if (state == 1) {
-        start(ntxt0);
+        start(ntxt);
     } else if (state == 2) {
-        start(ntxt1);
+        //need to refactor
     } else if (state == 3) {
         start(txt1);
     } else if (state == 4) {
@@ -157,8 +154,6 @@ function moreExposition() {
     nextText();
 }
 
-// will need to write php script as well as decide how 
-// to display the notification to the player.
 function giveSack() {
     giveItem('1', '3');
     state = 6;
