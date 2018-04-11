@@ -226,4 +226,7 @@ mysqli_close($conn);
         </div>
     </div>
 </div>
-<script src="../js/battle.js"></script>
+<script src="../../js/battle.js"></script>
+<script>
+    initialize();
+</script>

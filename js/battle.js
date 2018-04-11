@@ -464,7 +464,4 @@ function ko() {
     console.log("Knock out.");
 }
 
-
-$(document).ready(function() {
-    initialize();
-});
+initialize();
