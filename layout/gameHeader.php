@@ -10,10 +10,12 @@
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/ajax.js"></script>
     <script src="../js/uiEffects.js"></script>
+    <script src="../js/gameUtil.js"></script>
     <title>NuzMon</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+<!--
 <div class="col-md-2 d-none d-md-block sidebar">
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
@@ -25,3 +27,4 @@
         </ul>
     </div>
 </div>
+-->

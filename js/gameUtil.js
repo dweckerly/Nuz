@@ -17,3 +17,10 @@ function itemModal(data) {
     $('#itemDescription').html(obj.description);
     $('#itemModal').modal();
 }
+
+function callBattlePage() {
+    console.log("first function called...");
+    getXHR("../test/battle/getPartyMons.php", function(data) {
+        $("#mainContainer").html(data);
+    });
+}

@@ -2,8 +2,9 @@
 include_once("../layout/gameHeader.php");
 ?>
 <div id="mainContainer">
-    <div id="map">
-        <!-- currently just doing a 3 x 3 grid for the map -->
+    <button onclick="callBattlePage()"></button>
+    <!--<div id="map">
+        currently just doing a 3 x 3 grid for the map
         <div id="0" class="row">
             <div id="0-0" class="col"><button><i class="fa fa-anchor" style="font-size:36px"></i></button></div>
             <div id="0-1" class="col"><button><i class="fa fa-birthday-cake" style="font-size:36px"></i></button></div>
@@ -21,7 +22,8 @@ include_once("../layout/gameHeader.php");
         </div>
     </div>
 </div>
-<script src="../js/mapMaker.js"></script>
+<script src="../js/mapMaker.js"></script>-->
+</div>
 <?php
 include_once("../layout/gameFooter.php");
 ?>

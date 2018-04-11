@@ -465,4 +465,6 @@ function ko() {
 }
 
 
-initialize();
+$(document).ready(function() {
+    initialize();
+});
