@@ -239,6 +239,37 @@ function battleWriter(text) {
     }, typeSpeed);
 }
 
+function atkTypeCheck(atkType, defMonType1, defMonType2) {
+    var mod = 1;
+
+    //fire
+    if(atkType == 'Fire') {
+        if(defMonType1 == 'Water' || defMonType2 == 'Water') {
+            mod = mod / 2;
+        }
+        if(defMonType == 'Plant' || defMonType2 == 'Plant') {
+            mod = mod * 2;
+        }
+    }
+
+    // water
+    if(atkType == 'Water') {
+        if(defMonType1 == 'Plant' || defMonType2 == 'Plant') {
+            mod = mod / 2;
+        }
+        if(defMonType == 'Fire' || defMonType2 == 'Fire') {
+            mod = mod * 2;
+        }
+    }
+
+    // plant
+    if(atkType == 'Plant') {
+        if(defMonType1 == 'Fire' || defMonType2 == 'Fire') {
+            mod = mod / 2;
+        }
+    }
+}
+
 function attack() {
     if (turn == 'player') {
         atkMonArr = pMons;
@@ -267,17 +298,9 @@ function attack() {
         var miss = Math.floor(Math.random() * 100);
         if (miss <= (atkMonArr[atkMonNum]['attacks'][atkMonNum]['acc'] * atkMonMod['acc'])) {
             
-            /* * * * * * * * * * * * * * * * * * */
-            /* need to do type checking for the attacks... 
-            /* Once I figure out how the type system works...
-            /* doing it here in the case of invulnerability
-            /* var dmgMod;
-            /* dmgMod = typeCheck(dmg);
-            /* * * * * * * * * * * * * * * * * * */
-            
             // check for attacks that don't do damage
             if(atkMonArr[atkMonNum]['attacks'][atkNum]['dmg'] == 0) {
-                setTimeout(effectCheck, typeTimeout);
+                effectCheck();
             } else {
                 // check for attacks that do damage
                 if (atkMonArr[atkMonNum]['attacks'][atkNum]['special'] == 0) {
@@ -285,10 +308,15 @@ function attack() {
                 } else if (atkMonArr[atkMonNum]['attacks'][atkNum]['special'] == 1) {
                     var dmg = Math.round(((atkMonArr[atkMonNum]['sAtk'] * atkMonMod['sAtk']) / (defMonArr[defMonNum]['sDef'] * defMonMod['sDef'])) * atkMonArr[atkMonNum]['attacks'][atkNum]['dmg']);
                 }
+                var dmgMod = atkTypeCheck(atkMonArr[atkMonNum]['attacks'][atkNum]['type'], defMonArr[defMonNum]['type1'], defMonArr[defMonNum]['type2']);
                 var crit = Math.floor(Math.random() * 100);
                 if(dmg < 1) {
                     dmg = 1;
                 }
+
+                // TODO: 
+                // will need to add check for super effective and whatnot...
+                dmg = dmg * dmgMod;
                 if (crit >= (atkMonArr[atkMonNum]['attacks'][atkNum]['crit'] * atkMonMod['crit'])) {
                     decreaseHealth(dmg, bar);
                 } else {
@@ -413,7 +441,7 @@ function applyEffects(eff) {
             clearInterval(effects);
             swapTurn();
         }
-    }, typeTimeout + 500);
+    }, typeTimeout);
 }
 
 function decreaseHealth(dmg, bar) {
@@ -458,6 +486,7 @@ function addState(state){
     } else {
         defMonArr[defMonNum]['status'] += "-" + state;
     }
+    statusDisplay();
 }
 
 function ko() {
