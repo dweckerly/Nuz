@@ -12,10 +12,13 @@ function itemModal(data) {
     if (quantity > 1) {
         $('#itemName').html("You received " + quantity + " " + obj.name + "s!");
     } else {
-        $('#itemName').html("You received a " + obj.name);
+        $('#itemName').html("You received one " + obj.name + '!');
     }
     $('#itemDescription').html(obj.description);
     $('#itemModal').modal({backdrop: 'static', keyboard: false});
+    $('#getItem').click(function () {
+        $('#itemModal').modal('hide');
+    });
 }
 
 function callBattlePage() {

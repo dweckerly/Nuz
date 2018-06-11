@@ -1,9 +1,13 @@
 <?php
+include_once('../util/sessionTracker.php');
+session_start();
+if(!isset($_SESSION['gid'])) {
+    header("Location: ../error.php?intro=nosesh");
+    exit();
+}
 include_once("../layout/gameHeader.php");
 ?>
 <div id="mainContainer">
-    <h1>Main game</h1>
-    <button onclick="callBattlePage()"></button>
     <!--<div id="map">
         currently just doing a 3 x 3 grid for the map
         <div id="0" class="row">
