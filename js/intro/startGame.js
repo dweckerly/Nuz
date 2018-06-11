@@ -30,12 +30,9 @@ var txt3 = ["Suppose all you need now is... more 'mons! Only way to get 'em is t
 ];
 
 // go over battle? have battle?
-var txt4 = ["",
-    ""
+var txt4 = ["Looks like you're all set! If my spaghetti code hasn't borken somewhere you can now go explore the world!",
+    "Huzzah!"
 ];
-
-var txt5 = ["", ""];
-
 
 nameBtn.addEventListener("click", function() {
     $('#nameModal').modal('hide');
@@ -81,7 +78,8 @@ function start(txt) {
         } else if (state == 5) {
             giveSack();
         } else if (state == 6) {
-
+            //send player to the main game
+            window.location = "http://nuz.96.lt/game/main.g.php";
         }
     }
 }

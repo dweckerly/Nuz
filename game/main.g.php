@@ -2,6 +2,7 @@
 include_once("../layout/gameHeader.php");
 ?>
 <div id="mainContainer">
+    <h1>Main game</h1>
     <button onclick="callBattlePage()"></button>
     <!--<div id="map">
         currently just doing a 3 x 3 grid for the map
