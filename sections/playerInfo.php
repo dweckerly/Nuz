@@ -31,9 +31,9 @@ if(!empty($_SESSION['gid'])) {
         $count = mysqli_num_rows($result);
         // show player information
 ?>
-<div id="playerInfo" class="shadow p-3 mb-5 bg-white rounded">
+<div id="playerInfo">
     <h2><?php echo $pName; ?></h2>
-    <p class="small"><?php echo $loc; ?></p>
+    <p><?php echo $loc; ?>, Day <?php echo $day;?></p>
     <p class="small"><?php echo $count; ?> NuzMon</p>
 </div>
 <?php

@@ -15,14 +15,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+    <div class="">
+        <ul class="nav justify-content-around bg-light">
+            <li class="nav-item time-bar" id="dayOrNight"></li>
+            <li class="nav-item time-bar" id="dayCount"></li>
+            <li class="nav-item time-bar" id="time"></li>
+        </ul>
+    </div>
+    <script src="../js/dayAndTime.js"></script>
 <div class="col-md-2 d-none d-md-block sidebar">
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
-            <li class="nav-item"><button class="btn"><img src="../img/ui/dex.jpg" class="img-fluid"></button></li>
-            <li class="nav-item"><button class="btn"><img src="../img/ui/mons.jpg" class="img-fluid"></button></li>
-            <li class="nav-item"><button class="btn"><img src="../img/ui/inventory.jpg" class="img-fluid"></button></li>
-            <li class="nav-item"><button class="btn"><img src="../img/ui/player.jpg" class="img-fluid"></button></li>
-            <li class="nav-item"><button class="btn"><img src="../img/ui/journal.jpg" class="img-fluid"></button></li>
+            <li class="nav-item"><button class="btn btn-light"><img src="../img/ui/dex.jpg" class="img-fluid"></button></li>
+            <li class="nav-item"><button class="btn btn-light"><img src="../img/ui/mons.jpg" class="img-fluid"></button></li>
+            <li class="nav-item"><button class="btn btn-light"><img src="../img/ui/inventory.jpg" class="img-fluid"></button></li>
+            <li class="nav-item"><button class="btn btn-light"><img src="../img/ui/player.jpg" class="img-fluid"></button></li>
+            <li class="nav-item"><button class="btn btn-light"><img src="../img/ui/journal.jpg" class="img-fluid"></button></li>
         </ul>
     </div>
 </div>

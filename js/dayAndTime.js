@@ -2,43 +2,49 @@ var day = true;
 var dayCount = 1;
 var millitaryTime = false;
 
+var minutes = 0;
+var hours = 7;
+
 // amount of time for a minute to pass (in milliseconds)
-var minuteInterval = 20;
+var minuteInterval = 1000;
 
 function timeKeeper() {
-    var minutes = 0;
-    var hours = 7;
-
+    updateDay();
+    keepTime();
     setInterval(function() {
-        // update minutes everytime called
-        minutes++;
-        // change minutes and hours to replicate actual time keeping
-        if (minutes > 59) {
-            minutes = 0;
-            hours++;
-            if (hours > 23) {
-                hours = 0;
-                dayCount++;
-                updateDay();
-            }
-        }
-
-        // check for if it's day or night
-        if (hours > 17 || hours < 6) {
-            day = false;
-            cycleDay("Night");
-        } else {
-            day = true;
-            cycleDay("Day");
-        }
-
-        // check for military or standard time setting
-        if (millitaryTime) {
-            millitaryTimeDisplay(hours, minutes);
-        } else {
-            standardTimeDisplay(hours, minutes);
-        }
+        keepTime();
     }, minuteInterval)
+}
+
+function keepTime () {
+    
+    // change minutes and hours to replicate actual time keeping
+    if (minutes > 59) {
+        minutes = 0;
+        hours++;
+        if (hours > 23) {
+            hours = 0;
+            dayCount++;
+            updateDay();
+        }
+    }
+
+    // check for if it's day or night
+    if (hours > 17 || hours < 6) {
+        day = false;
+        cycleDay("Moon");
+    } else {
+        day = true;
+        cycleDay("Sun");
+    }
+
+    // check for military or standard time setting
+    if (millitaryTime) {
+        millitaryTimeDisplay(hours, minutes);
+    } else {
+        standardTimeDisplay(hours, minutes);
+    }
+    minutes++;
 }
 
 // next two functions control display of the two options
@@ -84,8 +90,4 @@ function updateDay() {
     document.getElementById("dayCount").innerHTML = "Day " + dayCount;
 }
 
-// will call this function when a button is clicked in on the main frame. Passing in 
-// the index of the HTML to be displayed. Need to store that in some variable...
-function changeMainFrame(index) {
-    document.getElementById("mainFrame").innerHTML = "<h1>TEST " + index + "</h1>";
-}
+window.onload = timeKeeper;
