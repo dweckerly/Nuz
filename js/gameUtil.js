@@ -15,7 +15,7 @@ function itemModal(data) {
         $('#itemName').html("You received a " + obj.name);
     }
     $('#itemDescription').html(obj.description);
-    $('#itemModal').modal();
+    $('#itemModal').modal({backdrop: 'static', keyboard: false});
 }
 
 function callBattlePage() {

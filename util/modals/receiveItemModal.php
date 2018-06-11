@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div>
-                    <button class="btn btn-outline-secondary">Confirm</button>
+                    <button class="btn btn-outline-secondary">Thanks!</button>
                 </div>
             </div>
         </div>
