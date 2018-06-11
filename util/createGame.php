@@ -18,6 +18,7 @@ if(!empty($_SESSION['gid'])) {
             }
         }
         // create game
+        $gid = $_SESSION['gid'];
         $sql = "INSERT INTO games (gameID, playerID) VALUES ('$gid', '$pid')";
         mysqli_query($conn, $sql);
         $_SESSION['pid'] = $pid;

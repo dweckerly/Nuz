@@ -1,6 +1,7 @@
 <?php
+session_start();
 if(!empty($_SESSION['gid'])) {
-    include_once("../includes/db.inc.php");
+    include_once('includes/db.inc.php');
     $gid = $_SESSION['gid'];
     $sql = "SELECT * FROM games WHERE gameID = '$gid'";
     $result = mysqli_query($conn, $sql);
@@ -10,7 +11,7 @@ if(!empty($_SESSION['gid'])) {
         $locID = $row['locationID'];
         $day = $row['day'];
         $time = $row['time'];
-        $sql = "SELECT name FROM locations WHERE locationID = '$locID'";
+        $sql = "SELECT * FROM locations WHERE locationID = '$locID'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
         $loc = $row['name'];
@@ -21,16 +22,33 @@ if(!empty($_SESSION['gid'])) {
             $pid = $_SESSION['pid'];
         }
         // get player name from player table
+        $sql = "SELECT * FROM players WHERE playerID = '$pid'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $pName = $row['name'];
+        $sql = "SELECT * from ownedMons WHERE playerID = '$pid'";
+        $result = mysqli_query($conn, $sql);
+        $count = mysqli_num_rows($result);
         // show player information
-    } else {?>
-
+?>
+<div id="playerInfo" class="shadow p-3 mb-5 bg-white rounded">
+    <h2><?php echo $pName; ?></h2>
+    <p class="small"><?php echo $loc; ?></p>
+    <p class="small"><?php echo $count; ?> NuzMon</p>
+</div>
+<?php
+    } else {
+?>
+        <div class="shadow p-3 mb-5 bg-white rounded">
+            <h4>Game not yet created</h4>
+        </div>
     <?php
-        // show create game dialogue
     } ?>
 <form action="../util/loadGame.php" method="POST">
     <button class="btn btn-outline-secondary" type="submit" name="submit">Play Game!</button>
 </form>
 <?php
+    mysqli_close($conn);
 } else {
     // empty gid in session... ¯\_(ツ)_/¯
     ?>
