@@ -153,5 +153,8 @@ function moreExposition() {
 function giveSack() {
     giveItem('1', '3');
     state = 6;
-    nextText();
+    $('#getItem').click( function() {
+        $('#itemModal').modal('hide');
+        nextText();
+    });
 }
