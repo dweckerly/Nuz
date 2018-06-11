@@ -11,6 +11,9 @@
                         <p id='itemDescription'></p>
                     </div>
                 </div>
+                <div>
+                    <button class="btn btn-outline-secondary">Confirm</button>
+                </div>
             </div>
         </div>
     </div>

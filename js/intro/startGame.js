@@ -25,8 +25,7 @@ var txt1 = ["Whadaya say we find you a pardner? It's been tough times around her
 var txt2 = ['Whadaya say you give that little critter a name, huh?'];
 
 // add stuff about catching nuzmon
-var txt3 = ["Suppose all you need now is... more 'mons!",
-    "Only way to get 'em is to go out an catch 'em!",
+var txt3 = ["Suppose all you need now is... more 'mons! Only way to get 'em is to go out an catch 'em!",
     "I think we got a couple sacks layin' around here you can have..."
 ];
 
@@ -114,7 +113,7 @@ function nextText() {
 }
 
 function openModal(id) {
-    $(id).modal();
+    $(id).modal({backdrop: 'static', keyboard: false});
 }
 
 function makeChoice() {
