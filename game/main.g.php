@@ -7,7 +7,7 @@ if(!isset($_SESSION['gid'])) {
 }
 include_once("../layout/gameHeader.php");
 ?>
-<div id="mainContainer">
+<div id="mainContainer container">
     <?php
     include_once('views/map.php');
     include_once('views/location.php');
