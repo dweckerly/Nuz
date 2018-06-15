@@ -28,3 +28,7 @@ function callBattlePage() {
         initialize();
     });
 }
+
+$('#close-btn').click(function () {
+    $('#main-sidebar').css("display", "none");
+})

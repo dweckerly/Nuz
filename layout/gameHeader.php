@@ -9,8 +9,6 @@
     <link href="../css/style.css" rel="stylesheet">
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/ajax.js"></script>
-    <script src="../js/uiEffects.js"></script>
-    <script src="../js/gameUtil.js"></script>
     <title>NuzMon</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -23,15 +21,18 @@ $row = mysqli_fetch_assoc($result);
 $name = $row['name'];
 ?>
 <body>
-    <div class="sidebar bg-light" align="center">
-        <ul class="nav flex-column">
-            <li class="nav-item"><button class="btn btn-light">NuzPad</button></li>
-            <li class="nav-item"><button class="btn btn-light">NuzMon</button></li>
-            <li class="nav-item"><button class="btn btn-light">Inventory</button></li>
-            <li class="nav-item"><button class="btn btn-light"><?php echo $name; ?></button></li>
-            <li class="nav-item"><button class="btn btn-light">Map</button></li>
-            <li class="nav-item"><button class="btn btn-light">Journal</button></li>
-        </ul>
+    <div id="main-sidebar" class="sidebar bg-light">
+        <a href="javascript:void(0)" id="close-btn">&times;</a>
+        <div id="nav-list-container" align="center">
+            <ul class="nav flex-column">
+                <li class="nav-item"><button class="btn btn-light">NuzPad</button></li>
+                <li class="nav-item"><button class="btn btn-light">NuzMon</button></li>
+                <li class="nav-item"><button class="btn btn-light">Inventory</button></li>
+                <li class="nav-item"><button class="btn btn-light"><?php echo $name; ?></button></li>
+                <li class="nav-item"><button class="btn btn-light">Map</button></li>
+                <li class="nav-item"><button class="btn btn-light">Journal</button></li>
+            </ul>
+        </div>
     </div>
     <div class="bg-light" id="main-nav">
         <ul class="nav" id="main-nav-list">
