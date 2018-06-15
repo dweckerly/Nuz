@@ -14,23 +14,31 @@
     <title>NuzMon</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<?php 
+include_once('../includes/db.inc.php');
+$pid = $_SESSION['pid'];
+$sql = "SELECT * FROM players WHERE playerID = '$pid'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$name = $row['name'];
+?>
 <body>
-    <div class="">
-        <ul class="nav justify-content-around bg-light">
-            <li class="nav-item time-bar" id="dayOrNight"></li>
-            <li class="nav-item time-bar" id="dayCount"></li>
-            <li class="nav-item time-bar" id="time"></li>
+    <div class="sidebar bg-light">
+        <ul class="nav flex-column">
+            <li class="nav-item"><button class="btn btn-light">NuzPad</button></li>
+            <li class="nav-item"><button class="btn btn-light">NuzMon</button></li>
+            <li class="nav-item"><button class="btn btn-light">Map</button></li>
+            <li class="nav-item"><button class="btn btn-light">Inventory</button></li>
+            <li class="nav-item"><button class="btn btn-light"><?php echo $name; ?></button></li>
+            <li class="nav-item"><button class="btn btn-light">Journal</button></li>
+        </ul>
+    </div>
+    <div class="main-nav">
+        <ul class="nav bg-light">
+            <li class="nav-item nav-bar" id="dayOrNight"></li>
+            <li class="nav-item nav-bar" id="dayCount"></li>
+            <li class="nav-item nav-bar" id="time"></li>
+            <li class="nav-item nav-bar"><a href='../util/logout.util.php'>Log Out</a></li>
         </ul>
     </div>
     <script src="../js/dayAndTime.js"></script>
-<div class="col-md-2 d-none d-md-block sidebar">
-    <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-            <li class="nav-item"><button class="btn btn-light"><img src="../img/ui/dex.jpg" class="img-fluid"></button></li>
-            <li class="nav-item"><button class="btn btn-light"><img src="../img/ui/mons.jpg" class="img-fluid"></button></li>
-            <li class="nav-item"><button class="btn btn-light"><img src="../img/ui/inventory.jpg" class="img-fluid"></button></li>
-            <li class="nav-item"><button class="btn btn-light"><img src="../img/ui/player.jpg" class="img-fluid"></button></li>
-            <li class="nav-item"><button class="btn btn-light"><img src="../img/ui/journal.jpg" class="img-fluid"></button></li>
-        </ul>
-    </div>
-</div>

@@ -9,7 +9,7 @@ if(!empty($_GET['login'])) {
     <h3 class="index-section-header">Log In</h3>
     <div class="form-group">
         <input type="text" name="email" placeholder="Da emails">
-        <input type="text" name="password" placeholder="yur paswerd">
+        <input type='password' name="password" placeholder="yur paswerd">
     </div>
     <div class="form-group">
         <button class="btn btn-outline-secondary" type="submit" name='submit'>Log In</button>
