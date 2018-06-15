@@ -21,9 +21,9 @@ $row = mysqli_fetch_assoc($result);
 $name = $row['name'];
 ?>
 <body>
-    <div id="main-sidebar" class="sidebar bg-light">
-        <a href="javascript:void(0)" id="close-btn">&times;</a>
-        <div id="nav-list-container" align="center">
+    <div id="wrapper" class="sidebar bg-light">
+        <div class="overlay"></div>
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
             <ul class="nav flex-column">
                 <li class="nav-item"><button class="btn btn-light">NuzPad</button></li>
                 <li class="nav-item"><button class="btn btn-light">NuzMon</button></li>
@@ -31,10 +31,16 @@ $name = $row['name'];
                 <li class="nav-item"><button class="btn btn-light"><?php echo $name; ?></button></li>
                 <li class="nav-item"><button class="btn btn-light">Map</button></li>
                 <li class="nav-item"><button class="btn btn-light">Journal</button></li>
+                <li><a href="#" class="close">Close</a></li>
             </ul>
-        </div>
+        </nav>
     </div>
     <div class="bg-light" id="main-nav">
+        <button type="button" class="hamburger open-nav is-closed animated fadeInLeft">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+        </button>
         <ul class="nav" id="main-nav-list">
             <li class="nav-item nav-bar" id="dayOrNight"></li>
             <li class="nav-item nav-bar" id="dayCount"></li>

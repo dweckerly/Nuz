@@ -70,6 +70,6 @@ body {
     z-index: 1;
     top: 0;
     left: 0;
-    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-x: hidden; 
     padding-top: 20px;
 }
