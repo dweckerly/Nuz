@@ -2,8 +2,16 @@
 require_once('inc/util.php');
 readfile("layout/head.html");
 if(isSeshActive()){
-    $active = $db->prepare("SELECT * FROM active WHERE gameId = ?")->execute([$_SESION['sid']]);
+    $active = $db->prepare("SELECT * FROM active WHERE seshId = ?");
+    $active->execute([$_SESION['sid']]);
     $user = $active->fetch();
+    if($user->rowCount() > 0) {
+        echo $user['uname'];
+        echo $_SESION['sid'];
+        echo $_SESSION['lastActivity'];
+    } else {
+        echo "no rows";
+    }
 } else {
 ?>
 <form id="signupForm" class='signup-form' action='./signup.php' method='POST'>

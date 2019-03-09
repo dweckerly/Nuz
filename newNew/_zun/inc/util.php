@@ -1,18 +1,15 @@
 <?php
-if(!isset($_SESSION)) {
-    session_start();
-}
+session_start();
 
 if(!isset($db)) {
     include_once("./inc/db.php");
 }
 
 function generateRandomString($length = 10) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-=+';
-    $charactersLength = strlen($characters);
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $randomString = '';
     for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
+        $randomString .= $characters[rand(0, strlen($characters) - 1)];
     }
     return $randomString;
 }
@@ -21,8 +18,9 @@ function createActiveSesh($user) {
     $sesh = generateRandomString();
     $unique = FALSE;
     while(!$unique) {
-        $stmt = $db->query("SELECT * FROM active WHERE sheshId = '$sesh'")->fetchAll();
-        if($stmt) {
+        $stmt = $db->prepare("SELECT * FROM active WHERE seshId = ?");
+        $stmt->execute([$sesh]);
+        if($stmt->rowCount() > 0) {
             $sesh = generateRandomString();
         } else {
             $unique = TRUE;
@@ -30,7 +28,7 @@ function createActiveSesh($user) {
     }
     $_SESSION['sid'] = $sesh;
     $_SESSION['lastActivity'] = time();
-    $stmt = $db->prepare("INSERT INTO active SET uname = ?, seshId = ?")->execute($user, $sesh);
+    $db->prepare("INSERT INTO active (uname, seshId) VALUES (?, ?)")->execute([$user, $sesh]);
 }
 
 function isSeshActive() {
