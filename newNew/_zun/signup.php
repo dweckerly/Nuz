@@ -1,6 +1,7 @@
 <?php
-if(isset($_POST['submit'])) {
-    require_once('inc/util.php');
+require "inc/db.php";
+require "inc/util.php";
+if(isset($_POST['submit'])) {  
     $uname = $_POST['uname'];
     $password = $_POST['password'];
     if(empty($uname) || empty($password)) {
@@ -18,20 +19,8 @@ if(isset($_POST['submit'])) {
             // hash and insert credentials into DB
             $hash = password_hash($password, PASSWORD_DEFAULT);
             $db->prepare("INSERT INTO users SET uname = ?, pwd = ?")->execute([$uname, $hash]);
-            $sesh = generateRandomString();
-            $unique = FALSE;
-            while(!$unique) {
-                $stmt = $db->prepare("SELECT * FROM active WHERE seshId = ?");
-                $stmt->execute([$sesh]);
-                if($stmt->rowCount() > 0) {
-                    $sesh = generateRandomString();
-                } else {
-                    $unique = TRUE;
-                }
-            }
-            $_SESSION['sid'] = $sesh;
-            $_SESSION['lastActivity'] = time();
-            $db->prepare("INSERT INTO active (uname, seshId) VALUES (?, ?)")->execute([$uname, $sesh]);
+            $util = new Util($db);
+            $util->createActiveSesh($uname);
             header("Location: index.php");
             exit();
         }

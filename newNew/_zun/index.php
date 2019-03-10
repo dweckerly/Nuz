@@ -1,18 +1,27 @@
 <?php
-require_once('inc/util.php');
+require "inc/db.php";
+require "inc/util.php";
+session_start();
+$util = new Util($db);
 readfile("layout/head.html");
-if(isSeshActive()){
+if($util->isSeshActive()){
+    echo $_SESSION['sid'] . " sid";
+    echo $_SESSION['lastActivity'] . " time";
     $active = $db->prepare("SELECT * FROM active WHERE seshId = ?");
-    $active->execute([$_SESION['sid']]);
-    $user = $active->fetch();
-    if($user->rowCount() > 0) {
-        echo $user['uname'];
-        echo $_SESION['sid'];
-        echo $_SESSION['lastActivity'];
-    } else {
-        echo "no rows";
-    }
+    $active->execute([$_SESSION['sid']]);
+    $data = $active->fetchAll();
+    echo $data[0]['uname'];
+?>
+<ul>
+<?php foreach($data as $row): ?>
+    <li><?=$row['uname'];?></li>
+<?php endforeach ?>
+</ul>
+<?php
 } else {
+    if(isset($_SESSION['sid'])) {
+        echo $_SESSION['sid'];
+    }
 ?>
 <form id="signupForm" class='signup-form' action='./signup.php' method='POST'>
     <p class="index-section-header">Sign Up</p>
