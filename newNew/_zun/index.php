@@ -1,12 +1,11 @@
 <?php
 require "inc/db.php";
 require "inc/util.php";
-session_start();
-$util = new Util($db);
+
 readfile("layout/head.html");
-if($util->isSeshActive()){
-    echo $_SESSION['sid'] . " sid";
-    echo $_SESSION['lastActivity'] . " time";
+
+$util = new Util($db);
+if($util->isSeshActive()) {
     $active = $db->prepare("SELECT * FROM active WHERE seshId = ?");
     $active->execute([$_SESSION['sid']]);
     $data = $active->fetchAll();
@@ -19,9 +18,6 @@ if($util->isSeshActive()){
 </ul>
 <?php
 } else {
-    if(isset($_SESSION['sid'])) {
-        echo $_SESSION['sid'];
-    }
 ?>
 <form id="signupForm" class='signup-form' action='./signup.php' method='POST'>
     <p class="index-section-header">Sign Up</p>
