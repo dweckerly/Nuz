@@ -1,5 +1,3 @@
-$(window).on("unload", () => {
-    $.ajax({
-        url: '../api/deleteSesh.php'
-    })
+window.addEventListener("beforeunload", function(event) {
+    navigator.sendBeacon('auth/logout.php', "");
 });

@@ -28,7 +28,7 @@ class Util {
         session_start();
         $_SESSION['sid'] = $sesh;
         $_SESSION['lastActivity'] = time();
-        $this->db->prepare("INSERT INTO active (uname, seshId) VALUES (?, ?)")->execute([$user, $sesh]);
+        $this->db->prepare("INSERT INTO active (uname, seshId, lastActivity) VALUES (?, ?, ?)")->execute([$user, $sesh, $_SESSION['lastActivity']]);
     }
 
     function isSeshActive() {
@@ -50,5 +50,6 @@ class Util {
     function removeSesh() {
         session_start();
         $this->db->prepare("DELETE FROM active WHERE seshId = ?")->execute([$_SESSION['sid']]);
+        session_unset();
     }
 }

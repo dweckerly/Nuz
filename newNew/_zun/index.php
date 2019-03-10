@@ -16,10 +16,11 @@ if($util->isSeshActive()) {
     <li><?=$row['uname'];?></li>
 <?php endforeach ?>
 </ul>
+<a href="auth/logout.php">log out</a>
 <?php
 } else {
 ?>
-<form id="signupForm" class='signup-form' action='./signup.php' method='POST'>
+<form id="signupForm" class='signup-form' action='auth/signup.php' method='POST'>
     <p class="index-section-header">Sign Up</p>
     <div class='form-group '>
         <input type='text' name='uname' placeholder='name' maxlength="32">
