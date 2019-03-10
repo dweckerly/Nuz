@@ -48,6 +48,7 @@ class Util {
     }
 
     function removeSesh() {
+        session_start();
         $this->db->prepare("DELETE FROM active WHERE seshId = ?")->execute([$_SESSION['sid']]);
     }
 }
